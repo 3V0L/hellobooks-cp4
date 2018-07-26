@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { resetPost } from '../../helpers/apiFetch/authUrls';
+import { checkIfLoggedIn, resetPost } from '../../helpers/authUrls';
 
 class ResetPassword extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-        this.state = {
-            email: ''
-        };
+    state = {
+        email: ''
+    };
+
+    componentWillMount() {
+        checkIfLoggedIn(this.props);
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    submitForm(e) {
+    submitForm = (e) => {
         e.preventDefault();
         resetPost('reset-password', this.state, this.props, '');
     }
