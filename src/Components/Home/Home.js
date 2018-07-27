@@ -50,11 +50,11 @@ class Home extends React.Component {
                     <input type="submit" value="Submit" />
                 </form>
 
-                <Link to="/register" >
+                <Link to="/auth/register" >
                     <button type='button'>Register </button>
                 </Link>
                 <br/><br/>
-                <Link to="/reset-password">Forgot My Password</Link>
+                <Link to="/auth/reset-password">Forgot My Password</Link>
             </div>
         );
     }

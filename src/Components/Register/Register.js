@@ -19,7 +19,6 @@ class Register extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        checkIfLoggedIn(this.props);
         registerPost('register', this.state, this.props, '');
     }
 
@@ -58,11 +57,11 @@ class Register extends React.Component {
                     <input type="submit" value="Submit" />
                 </form>
 
-                <Link to="/" >
+                <Link to="/auth" >
                     <button type='button'>Back to Login Page</button>
                 </Link>
                 <br/><br/>
-                <Link to="/reset-password">Forgot My Password</Link>
+                <Link to="/auth/reset-password">Forgot My Password</Link>
             </div>
         );
     }

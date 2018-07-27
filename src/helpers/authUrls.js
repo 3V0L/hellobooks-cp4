@@ -14,7 +14,7 @@ export const resetPost = (url, input, props, redirect) => {
     })
         .then((res) => {
             alert(`${res.data.message}`);
-            props.history.push(`/${redirect}`);
+            props.history.push(`/auth/${redirect}`);
         })
         .catch((error) => {
             if (error.response.status === 404) {
@@ -43,12 +43,12 @@ export const registerPost = (url, input, props, redirect) => {
                 alert(`${res.data.message}`);
             } else {
                 alert(`${res.data.message}`);
-                props.history.push(`/${redirect}`);
+                props.history.push(`/auth/${redirect}`);
             }
         })
         .catch((error) => {
             alert(`Registration Failed, Please ensure your info is in the following formats:\n${warning}`);
-            props.history.push('/register');
+            props.history.push('/auth/register');
         });
 };
 
@@ -71,7 +71,7 @@ export const loginPost = (url, input, props, redirect) => {
         .catch((error) => {
             if (error.response) {
                 alert('Login Failed. Ensure all your details are correct and try again.');
-                props.history.push('/');
+                props.history.push('/auth');
             }
         });
 };
@@ -88,7 +88,6 @@ export const checkIfLoggedIn = (props) => {
         }
     })
         .then((res) => {
-            console.log(res);
             if (res.status === 200) {
                 alert(res.data.message);
                 props.history.push('hellobooks');

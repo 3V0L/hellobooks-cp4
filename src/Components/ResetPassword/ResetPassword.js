@@ -37,10 +37,10 @@ class ResetPassword extends React.Component {
                     <input type="submit" value="Submit" />
                 </form>
                 <br/><br/>
-                <Link to="/" >
+                <Link to="/auth" >
                     <button type='button'>Login</button>
                 </Link>
-                <Link to="/register" >
+                <Link to="/auth/register" >
                     <button type='button'>Register</button>
                 </Link>
             </div>
