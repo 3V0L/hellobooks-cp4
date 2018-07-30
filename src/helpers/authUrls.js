@@ -1,4 +1,6 @@
 import axios from 'axios';
+import swal from 'sweetalert';
+
 
 const baseURL = 'http://0.0.0.0:5000/api/v1/auth/';
 
@@ -13,14 +15,14 @@ export const resetPost = (url, input, props, redirect) => {
         }
     })
         .then((res) => {
-            alert(`${res.data.message}`);
+            swal('Success!', `${res.data.message}`, 'success');
             props.history.push(`/auth/${redirect}`);
         })
         .catch((error) => {
             if (error.response.status === 404) {
-                alert('Email does not exist. Try registering =)');
+                swal('Error', 'Email does not exist. Try registering =)', 'error');
             } else {
-                alert('Failed, Please Try Again.');
+                swal('Error', 'Failed, Please Try Again.', 'error');
             }
         });
 };
@@ -40,14 +42,16 @@ export const registerPost = (url, input, props, redirect) => {
     })
         .then((res) => {
             if (res.status !== 201) {
-                alert(`${res.data.message}`);
+                swal(`${res.data.message}`);
             } else {
-                alert(`${res.data.message}`);
+                swal('Success!', `${res.data.message}`, 'success');
                 props.history.push(`/auth/${redirect}`);
             }
         })
         .catch((error) => {
-            alert(`Registration Failed, Please ensure your info is in the following formats:\n${warning}`);
+            swal('Failed',
+                `Registration Failed, Please ensure your info is in the following formats:\n${warning}`,
+                'warning');
             props.history.push('/auth/register');
         });
 };
@@ -70,7 +74,7 @@ export const loginPost = (url, input, props, redirect) => {
         })
         .catch((error) => {
             if (error.response) {
-                alert('Login Failed. Ensure all your details are correct and try again.');
+                swal('Login Failed', 'Ensure all your details are correct and try again.', 'warning');
                 props.history.push('/auth');
             }
         });
@@ -89,8 +93,8 @@ export const checkIfLoggedIn = (props) => {
     })
         .then((res) => {
             if (res.status === 200) {
-                alert(res.data.message);
-                props.history.push('hellobooks');
+                swal(res.data.message, '', 'warning');
+                props.history.push('/hellobooks');
             }
         })
         .catch(() => {

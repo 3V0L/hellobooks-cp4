@@ -25,7 +25,7 @@ const Auth = ({ match }) => {
             <Route exact path={ match.url + '/reset-password' } component={ResetPassword} />
         </Switch>
     );
-}
+};
 
 const HelloBooks = ({ match }) => {
     return (
@@ -36,4 +36,4 @@ const HelloBooks = ({ match }) => {
             </Switch>
         </div>
     );
-}
+};
