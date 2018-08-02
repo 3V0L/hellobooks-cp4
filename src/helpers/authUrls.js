@@ -1,10 +1,9 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 
-
 const baseURL = 'http://0.0.0.0:5000/api/v1/auth/';
 
-export const resetPost = (url, input, props, redirect) => {
+export const resetPost = (url, input, redirect) => {
     axios({
         url: `${baseURL}${url}`,
         method: 'post',
@@ -15,8 +14,10 @@ export const resetPost = (url, input, props, redirect) => {
         }
     })
         .then((res) => {
-            swal('Success!', `${res.data.message}`, 'success');
-            props.history.push(`/auth/${redirect}`);
+            swal('Success!', `${res.data.message}`, 'success')
+                .then(() => {
+                    window.location.replace(`/auth/${redirect}`);
+                });
         })
         .catch((error) => {
             if (error.response.status === 404) {
@@ -27,7 +28,7 @@ export const resetPost = (url, input, props, redirect) => {
         });
 };
 
-export const registerPost = (url, input, props, redirect) => {
+export const registerPost = (url, input, redirect) => {
     // Warning message for incorrect details entered
     const warning = ('\nName: At least 4 characters/Alphabet Letters only\n\nPassword: At least 6 characters\n\nEmail: Formatted like me@example.com');
     // Axios request
@@ -44,19 +45,23 @@ export const registerPost = (url, input, props, redirect) => {
             if (res.status !== 201) {
                 swal(`${res.data.message}`);
             } else {
-                swal('Success!', `${res.data.message}`, 'success');
-                props.history.push(`/auth/${redirect}`);
+                swal('Success!', `${res.data.message}`, 'success')
+                    .then(() => {
+                        window.location.replace(`/auth/${redirect}`);
+                    });
             }
         })
         .catch((error) => {
             swal('Failed',
                 `Registration Failed, Please ensure your info is in the following formats:\n${warning}`,
-                'warning');
-            props.history.push('/auth/register');
+                'warning')
+                .then(() => {
+                    window.location.replace('/auth/register');
+                });
         });
 };
 
-export const loginPost = (url, input, props, redirect) => {
+export const loginPost = (url, input, redirect) => {
     axios({
         url: `${baseURL}${url}`,
         method: 'post',
@@ -70,17 +75,20 @@ export const loginPost = (url, input, props, redirect) => {
             localStorage.setItem('token', res.data.access_token);
             localStorage.setItem('name', res.data.user);
             localStorage.setItem('admin', res.data.admin);
-            props.history.push(`/${redirect}`);
+            window.location.replace(`/${redirect}`);
         })
         .catch((error) => {
             if (error.response) {
-                swal('Login Failed', 'Ensure all your details are correct and try again.', 'warning');
-                props.history.push('/auth');
+                swal('Login Failed', 'Ensure all your details are correct and try again.', 'warning')
+                    .then(() => {
+                        localStorage.clear();
+                        window.location.replace('/auth');
+                    });
             }
         });
 };
 
-export const checkIfLoggedIn = (props) => {
+export const checkIfLoggedIn = () => {
     const token = localStorage.getItem('token');
     axios({
         url: `${baseURL}login_check`,
@@ -93,10 +101,38 @@ export const checkIfLoggedIn = (props) => {
     })
         .then((res) => {
             if (res.status === 200) {
-                swal(res.data.message, '', 'warning');
-                props.history.push('/hellobooks');
+                swal(res.data.message, 'Log Out to access this page', 'warning')
+                    .then(() => {
+                        window.location.replace('/hellobooks');
+                    });
             }
         })
         .catch(() => {
+        });
+};
+
+export const Logout = () => {
+    const token = localStorage.getItem('token');
+    axios({
+        url: `${baseURL}logout`,
+        method: 'post',
+        data: { '': '' },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            accept: 'application/json',
+            'content-type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+            swal(res.data.message, '', 'success')
+                .then(() => {
+                    localStorage.clear();
+                    window.location.replace('/auth');
+                });
+        })
+        .catch((error) => {
+            localStorage.clear();
+            window.location.replace('/auth');
         });
 };

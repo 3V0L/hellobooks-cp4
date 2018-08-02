@@ -21,7 +21,7 @@ class Home extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        loginPost('login', this.state, this.props, 'hellobooks');
+        loginPost('login', this.state, 'hellobooks');
     }
 
     render() {
