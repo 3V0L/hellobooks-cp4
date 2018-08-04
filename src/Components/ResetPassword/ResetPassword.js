@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { checkIfLoggedIn, resetPost } from '../../helpers/authUrls';
+import '../Home/Home.css';
 
 class ResetPassword extends React.Component {
     state = {
@@ -22,27 +23,34 @@ class ResetPassword extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Reset Password</h3>
-                <form onSubmit={this.submitForm}>
-                    Email:
-                    <input
-                        type="email"
-                        name="email"
-                        value={this.state.email}
-                        placeholder="Email"
-                        onChange={this.handleChange}
-                        required/>
-                    <br />
-                    <input type="submit" value="Submit" />
-                </form>
-                <br/><br/>
-                <Link to="/auth" >
-                    <button type='button'>Login</button>
-                </Link>
-                <Link to="/auth/register" >
-                    <button type='button'>Register</button>
-                </Link>
+            <div className='home'>
+                <h1 class='heading'>Hello Books Library</h1>
+                <div className='card '>
+                    <div className='card-header'>
+                        <h3>Reset Password</h3>
+                    </div>
+                    <div className='card-body'>
+                        <form onSubmit={this.submitForm} className='login-form'>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                    className="form-control"
+                                    placeholder="Enter Email"
+                                    required/>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                        </form>
+                        <div className='footer-card'>
+                            <Link to="/auth" className='link'>Login</Link>
+                            <br />
+                            <Link to="/auth/register" className='link'>Register</Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
