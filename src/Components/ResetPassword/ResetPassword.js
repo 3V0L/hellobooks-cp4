@@ -24,14 +24,14 @@ class ResetPassword extends React.Component {
     render() {
         return (
             <div className='home'>
-                <h1 class='heading'>Hello Books Library</h1>
+                <h1 className='heading'>Hello Books Library</h1>
                 <div className='card '>
                     <div className='card-header'>
                         <h3>Reset Password</h3>
                     </div>
                     <div className='card-body'>
                         <form onSubmit={this.submitForm} className='login-form'>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label for="email">Email address</label>
                                 <input
                                     type="email"
@@ -42,7 +42,7 @@ class ResetPassword extends React.Component {
                                     placeholder="Enter Email"
                                     required/>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                            <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Login</Link>
