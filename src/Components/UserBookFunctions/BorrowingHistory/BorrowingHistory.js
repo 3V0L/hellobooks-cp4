@@ -1,32 +1,30 @@
 import React from 'react';
 import queryString from 'querystring';
 import axios from 'axios';
-import swal from 'sweetalert';
 import { baseURL } from '../../../helpers/baseURL';
 import { borrowBook } from '../../../helpers/borrowUrls';
-import './ViewBooks.css';
+import '../ViewBooks/ViewBooks.css';
 import { Logout } from '../../../helpers/authUrls';
+import swal from 'sweetalert';
 
-class ViewBooks extends React.Component {
+class BorrowingHistory extends React.Component {
     constructor(props) {
         super(props);
         const params = queryString.parse(this.props.location.search.substr(1));
         this.state = {
             books: [],
-            page: parseInt(params.page, 10),
+            returned: `?returned=${params.returned}`,
         };
-        if (Number.isInteger(this.state.page) === false) {
-            this.state = { page: 1 };
+        if (this.state.returned === undefined) {
+            this.state = { returned: '' };
         }
         this.requestBooks();
-        this.paginator();
     }
 
     requestBooks() {
         const token = localStorage.getItem('token');
-        const page = this.state.page;
         axios({
-            url: `${baseURL}/books?page=${page}`,
+            url: `${baseURL}/users/books${this.state.returned}`,
             method: 'get',
             headers: {
                 accept: 'application/json',
@@ -40,62 +38,29 @@ class ViewBooks extends React.Component {
                     this.mapBooks();
                 }
             })
-            .catch((error) => {
-                if (error.response.status === 404) {
-                    swal('No more pages.', '', 'fail')
-                        .then(() => {
-                            const prevPage = page - 1;
-                            window.location.replace(`/hellobooks?page=${prevPage}`);
-                        });
-                } else {
-                    swal('An error occured. Please try log in again.', '', 'fail')
-                        .then(() => {
-                            Logout();
-                        });
-                }
+            .catch(() => {
+                swal('An error occured. Please try log in again.', '', 'fail')
+                    .then(() => {
+                        Logout();
+                    });
             });
-    }
-
-    paginator = () => {
-        const prevPage = this.state.page - 1;
-        const nextPage = this.state.page + 1;
-        if (this.state.page !== 1) {
-            const Paginator = (
-                <ul className="pagination">
-                    <li className="page-item"><a className="page-link" href={`hellobooks?page=${prevPage}`}>
-                        Previous
-                    </a></li>
-                    <li className="page-item"><a className="page-link active">Page {this.state.page}</a></li>
-                    <li className="page-item"><a className="page-link" href={`hellobooks?page=${nextPage}`}>Next</a></li>
-                </ul>
-            );
-            this.state = { paginator: Paginator };
-        } else {
-            const Paginator = (
-                <ul className="pagination">
-                    <li className="page-item"><a className="page-link disable">Page {this.state.page}</a></li>
-                    <li className="page-item"><a className="page-link" href={`hellobooks?page=${nextPage}`}>Next</a></li>
-                </ul>
-            );
-            this.state = { paginator: Paginator };
-        }
     }
 
     mapBooks = () => {
         if (this.state.books === undefined || this.state.books < 1) {
-            const BookDetails = (<h3 className='no-content'>No Books Here.</h3>);
+            const BookDetails = (<h3 className='no-content'>You have not borrowed a book yet.</h3>);
             this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
                 <div className="panel panel-default" key={book.id}>
                     <div className="panel-heading" role="tab" id="headingOne">
                         <h4 className="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href={`#num${book.isbn}`} aria-expanded="true" aria-controls="collapseOne">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href={'#num' + book.isbn} aria-expanded="true" aria-controls="collapseOne">
                                 {book.title} by {book.author}
                             </a>
                         </h4>
                     </div>
-                    <div id={`num${book.isbn}`} className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div id={'num' + book.isbn} className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                         <div className="panel-body">
                             <table id='table1'>
                                 <tbody>
@@ -150,15 +115,12 @@ class ViewBooks extends React.Component {
     render() {
         return (
             <div className="col-md-offset-3 col-md-6 view-books">
-                <h3 className='heading'>Available Books</h3>
+                <h3 className='heading'>Your Borrowing History</h3>
                 <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     { this.state.bookDetails }
                 </div>
-                <nav>
-                    { this.state.paginator }
-                </nav>
             </div>
         );
     }
 }
-export default ViewBooks;
+export default BorrowingHistory;

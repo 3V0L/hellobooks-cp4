@@ -7,6 +7,7 @@ import NavBar from './NavBar/NavBar';
 import Register from './Register/Register';
 import ResetPassword from './ResetPassword/ResetPassword';
 import ViewBooks from './UserBookFunctions/ViewBooks/ViewBooks';
+import BorrowingHistory from './UserBookFunctions/BorrowingHistory/BorrowingHistory';
 
 export default () => (
     <BrowserRouter>
@@ -20,9 +21,9 @@ export default () => (
 const Auth = ({ match }) => {
     return (
         <Switch>
-            <Route exact path={ match.url + '' } component={Home} />
-            <Route exact path={ match.url + '/register' } component={Register} />
-            <Route exact path={ match.url + '/reset-password' } component={ResetPassword} />
+            <Route exact path={`${match.url}`} component={Home} />
+            <Route exact path={`${match.url}/register`} component={Register} />
+            <Route exact path={`${match.url}/reset-password`} component={ResetPassword} />
         </Switch>
     );
 };
@@ -32,7 +33,8 @@ const HelloBooks = ({ match }) => {
         <div>
             <NavBar />
             <Switch>
-                <Route exact path={ match.url + '' } component={ViewBooks} />
+                <Route exact path={`${match.url}`} component={ViewBooks} />
+                <Route exact path={`${match.url}/my-history`} component={BorrowingHistory} />
             </Switch>
         </div>
     );

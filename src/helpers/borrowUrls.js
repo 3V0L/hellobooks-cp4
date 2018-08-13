@@ -25,6 +25,7 @@ export const borrowBook = (bookId, props) => {
         .then((res) => {
             console.log(props);
             console.log(res.data);
+            window.location.replace('/hellobooks/my-history');
         })
         .catch((error) => {
             console.log(error.response);
@@ -33,4 +34,4 @@ export const borrowBook = (bookId, props) => {
 
 export const returnBook = () => {
     console.log('sahjd');
-}
+};
