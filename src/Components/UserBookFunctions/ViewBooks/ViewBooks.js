@@ -2,6 +2,7 @@ import React from 'react';
 import queryString from 'querystring';
 import axios from 'axios';
 import { baseURL } from '../../../helpers/baseURL';
+import { borrowBook } from '../../../helpers/borrowUrls';
 import './ViewBooks.css';
 import { Logout } from '../../../helpers/authUrls';
 import swal from 'sweetalert';
@@ -93,13 +94,22 @@ class ViewBooks extends React.Component {
                                     </tr>
                                 </tbody>
                             </table>
-                            <button type="button" className="btn btn-success">Borrow this book</button>
+                            <button
+                                type="button"
+                                className="btn btn-success"
+                                onClick={() => { this.borrowBookFunction(book.id); }}>
+                                Borrow this book
+                            </button>
                         </div>
                     </div>
                 </div>
             ));
             this.setState({ bookDetails: BookDetails });
         }
+    }
+
+    borrowBookFunction = (bookId) => {
+        borrowBook(bookId, this.props);
     }
 
     render() {
