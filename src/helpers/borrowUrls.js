@@ -32,6 +32,32 @@ export const borrowBook = (bookId, props) => {
         });
 };
 
-export const returnBook = () => {
-    console.log('sahjd');
+export const returnBook = (bookId) => {
+    axios({
+        url: `${baseURL}/users/books/${bookId}`,
+        method: 'put',
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then((res) => {
+            if (res.status === 201) {
+                swal(res.data.message, '', 'success')
+                    .then(() =>{
+                        window.location.replace('/hellobooks');
+                    });
+            }
+        })
+        .catch((error) => {
+            if ([401, 404].includes(error.response.status)) {
+                swal(error.response.data.message, '', 'fail')
+                    .then(() => {
+                        window.location.replace('/hellobooks');
+                    });
+            } else {
+                swal('An error occured. Please try again.', '', 'fail');
+            }
+        });
 };

@@ -48,7 +48,7 @@ class ViewBooks extends React.Component {
                             window.location.replace(`/hellobooks?page=${prevPage}`);
                         });
                 } else {
-                    swal('An error occured. Please try log in again.', '', 'fail')
+                    swal('You are not logged in.', '', 'fail')
                         .then(() => {
                             Logout();
                         });

@@ -8,6 +8,7 @@ import Register from './Register/Register';
 import ResetPassword from './ResetPassword/ResetPassword';
 import ViewBooks from './UserBookFunctions/ViewBooks/ViewBooks';
 import BorrowingHistory from './UserBookFunctions/BorrowingHistory/BorrowingHistory';
+import ReturnBooks from './UserBookFunctions/ReturnBooks/ReturnBooks';
 
 export default () => (
     <BrowserRouter>
@@ -35,6 +36,7 @@ const HelloBooks = ({ match }) => {
             <Switch>
                 <Route exact path={`${match.url}`} component={ViewBooks} />
                 <Route exact path={`${match.url}/my-history`} component={BorrowingHistory} />
+                <Route exact path={`${match.url}/return`} component={ReturnBooks} />
             </Switch>
         </div>
     );
