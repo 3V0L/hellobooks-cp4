@@ -25,11 +25,11 @@ export const borrowBook = (bookId, props) => {
         .then((res) => {
             if (res.status === 201) {
                 swal(res.data.message, '', 'success')
-                    .then(() => { props.history.push('/hellobooks/my-history'); });
+                    .then(() => { props.history.push('/hellobooks/my-history/1'); });
             }
         })
         .catch((error) => {
-            swal(error.response.data.message, '', 'fail');
+            swal(error.response.data.message, '', 'error');
         });
 };
 
@@ -53,12 +53,12 @@ export const returnBook = (bookId, props) => {
         })
         .catch((error) => {
             if ([401, 404].includes(error.response.status)) {
-                swal(error.response.data.message, '', 'fail')
+                swal(error.response.data.message, '', 'error')
                     .then(() => {
                         props.history.push('/hellobooks/home/1');
                     });
             } else {
-                swal('An error occured. Please try again.', '', 'fail');
+                swal('An error occured. Please try again.', '', 'error');
             }
         });
 };

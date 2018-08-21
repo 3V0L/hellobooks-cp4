@@ -28,7 +28,7 @@ const UserNav = (
             <ul className="nav navbar-nav navbar-right">
                 <li className="nav-item">
                     <Link
-                        to="/hellobooks"
+                        to="/hellobooks/home/1"
                         className="nav-link">
                         Home
                     </Link>

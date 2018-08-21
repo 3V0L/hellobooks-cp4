@@ -34,12 +34,12 @@ class ReturnBooks extends React.Component {
             })
             .catch((error) => {
                 if (error.response.status === 404) {
-                    swal('No book under this Borrow Id.', '', 'fail')
+                    swal('No book under this Borrow Id.', '', 'error')
                         .then(() => {
-                            window.location.replace('/hellobooks');
+                            this.props.history.push('/hellobooks/home/1');
                         });
                 } else {
-                    swal('An error occured. Please try log in again.', '', 'fail')
+                    swal('An error occured. Please try log in again.', '', 'error')
                         .then(() => {
                             Logout();
                         });
@@ -49,53 +49,26 @@ class ReturnBooks extends React.Component {
 
     mapBooks = () => {
         if (this.state.books === undefined || this.state.books < 1) {
-            const BookDetails = (<h3 className='no-content'>No books to return.</h3>);
+            const BookDetails = (<h3 className='no-content'>You have not borrowed a book yet.</h3>);
             this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
-                <div className="panel panel-default" key={book.id}>
-                    <div className="panel-heading" role="tab" id="headingOne">
-                        <h4 className="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href={`#num${book.borrow_id}`} aria-expanded="true" aria-controls="collapseOne">
-                                {book.book_title} #{book.borrow_id}
-                            </a>
-                        </h4>
-                    </div>
-                    <div id={`num${book.borrow_id}`} className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div className="panel-body">
-                            <table id='table1'>
-                                <tbody>
-                                    <tr>
-                                        <th>Title:</th>
-                                        <td>{book.book_title}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>ISBN:</th>
-                                        <td>{book.isbn}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Due Date:</th>
-                                        <td>{book.due_date}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date Returned:</th>
-                                        <td>{book.date_returned}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date Borrowed:</th>
-                                        <td>{book.borrow_date}</td>
-                                    </tr>
-                                    <button
-                                        type="button"
-                                        className="btn btn-success"
-                                        onClick={() => { this.returnBookFunc(book.borrow_id); }}>
-                                        Return This Book
-                                    </button>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <tr>
+                    <th scope="row">{book.borrow_id}</th>
+                    <td>{book.book_title}</td>
+                    <td>{book.isbn}</td>
+                    <td>{book.due_date}</td>
+                    <td>{book.date_returned}</td>
+                    <td>{book.borrow_date}</td>
+                    <td>
+                        <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() => { this.returnBookFunc(book.borrow_id); }}>
+                            Return This Book
+                        </button>
+                    </td>
+                </tr>
             ));
             this.setState({ bookDetails: BookDetails });
         }
@@ -107,11 +80,24 @@ class ReturnBooks extends React.Component {
 
     render() {
         return (
-            <div className="col-md-offset-3 col-md-6 view-books">
+            <div className="col-md-offset-3 col-md-9 view-books table-responsive">
                 <h3 className='heading'>Books Due</h3>
-                <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    { this.state.bookDetails }
-                </div>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#Borrow ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">ISBN</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Date Returned</th>
+                            <th scope="col">Borrow Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { this.state.bookDetails }
+                    </tbody>
+                </table>
             </div>
         );
     }
