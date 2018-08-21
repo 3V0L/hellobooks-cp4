@@ -42,7 +42,7 @@ class ResetPassword extends React.Component {
                                     placeholder="Enter Email"
                                     required/>
                             </div>
-                            <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+                            <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Login</Link>

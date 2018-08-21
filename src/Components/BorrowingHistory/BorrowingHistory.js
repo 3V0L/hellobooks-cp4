@@ -49,7 +49,7 @@ class BorrowingHistory extends React.Component {
                 } else {
                     swal('An error occured. Please try log in again.', '', 'error')
                         .then(() => {
-                            Logout();
+                            Logout(this.props);
                         });
                 }
             });

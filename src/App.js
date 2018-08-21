@@ -11,6 +11,7 @@ import ResetPassword from './Components/ResetPassword/ResetPassword';
 import ViewBooks from './Components/ViewBooks/ViewBooks';
 import BorrowingHistory from './Components/BorrowingHistory/BorrowingHistory';
 import ReturnBooks from './Components/ReturnBooks/ReturnBooks';
+import ChangePassword from './Components/ChangePassword/ChangePassword';
 
 export default () => (
     <BrowserRouter>
@@ -40,6 +41,7 @@ const HelloBooks = ({ match }) => {
                 <Route exact path={`${match.url}/home/:page`} component={ViewBooks} />
                 <Route exact path={`${match.url}/my-history/:page`} component={BorrowingHistory} />
                 <Route exact path={`${match.url}/return`} component={ReturnBooks} />
+                <Route exact path={`${match.url}/change-password`} component={ChangePassword} />
             </Switch>
         </div>
     );

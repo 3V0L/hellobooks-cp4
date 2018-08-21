@@ -57,7 +57,7 @@ class Home extends React.Component {
                                     className="form-control"
                                     required/>
                             </div>
-                            <button type="submit" className="btn btn-primary btn-lg btn-block">Login</button>
+                            <button type="submit" className="btn btn-dark btn-lg btn-block">Login</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth/register" className='link'>Register</Link>

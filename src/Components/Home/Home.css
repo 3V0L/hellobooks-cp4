@@ -1,5 +1,5 @@
 .card {
-    margin-top: 60px;
+    margin-top: 80px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -16,6 +16,8 @@ body{
 }
 .card-header {
     text-align: center;
+    color: white;
+    background-color: black;
 }
 .footer-card {
     margin: auto;

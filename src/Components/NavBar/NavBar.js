@@ -58,7 +58,7 @@ const UserNav = (
                 <li>
                     <Link
                         to="/auth"
-                        onClick={Logout}
+                        onClick={Logout(this.props)}
                         className="nav-link">
                         Log Out
                     </Link>
