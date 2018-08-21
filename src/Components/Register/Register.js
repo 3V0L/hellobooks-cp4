@@ -20,7 +20,7 @@ class Register extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        registerPost('register', this.state, '');
+        registerPost('register', this.state, '', this.props);
     }
 
     render() {

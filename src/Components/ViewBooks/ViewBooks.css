@@ -1,0 +1,28 @@
+body{
+    background-color: #efefef;
+    background-image: none;
+}
+.view-books {
+    margin: 60px auto;
+}
+table#table1{
+    width: 100%;
+    margin-bottom: 14px;
+}
+.btn{
+    color: white;
+}
+.btn-light{
+    color: black;
+}
+.pagination{
+    display: -ms-grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+tr{
+    background-color: white;
+    border: solid;
+    border-width: 15px 0;
+    border-color: #efefef;
+}

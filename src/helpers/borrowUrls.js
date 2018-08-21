@@ -1,6 +1,6 @@
 import axios from 'axios';
 import swal from 'sweetalert';
-import { baseURL } from './baseURL';
+import baseURL from './baseURL';
 
 const URL = `${baseURL}/users/books/`;
 const token = localStorage.getItem('token');
@@ -23,18 +23,19 @@ export const borrowBook = (bookId, props) => {
         }
     })
         .then((res) => {
-            console.log(props);
-            console.log(res.data);
-            window.location.replace('/hellobooks/my-history');
+            if (res.status === 201) {
+                swal(res.data.message, '', 'success')
+                    .then(() => { props.history.push('/hellobooks/my-history'); });
+            }
         })
         .catch((error) => {
-            console.log(error.response);
+            swal(error.response.data.message, '', 'fail');
         });
 };
 
-export const returnBook = (bookId) => {
+export const returnBook = (bookId, props) => {
     axios({
-        url: `${baseURL}/users/books/${bookId}`,
+        url: `${URL}${bookId}`,
         method: 'put',
         headers: {
             accept: 'application/json',
@@ -45,8 +46,8 @@ export const returnBook = (bookId) => {
         .then((res) => {
             if (res.status === 201) {
                 swal(res.data.message, '', 'success')
-                    .then(() =>{
-                        window.location.replace('/hellobooks');
+                    .then(() => {
+                        props.history.push('/hellobooks/home/1');
                     });
             }
         })
@@ -54,7 +55,7 @@ export const returnBook = (bookId) => {
             if ([401, 404].includes(error.response.status)) {
                 swal(error.response.data.message, '', 'fail')
                     .then(() => {
-                        window.location.replace('/hellobooks');
+                        props.history.push('/hellobooks/home/1');
                     });
             } else {
                 swal('An error occured. Please try again.', '', 'fail');

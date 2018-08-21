@@ -1,24 +1,34 @@
 import React from 'react';
+import queryString from 'querystring';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { baseURL } from '../../../helpers/baseURL';
+import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
-import { Logout } from '../../../helpers/authUrls';
-import { returnBook } from '../../../helpers/borrowUrls';
+import { Logout } from '../../helpers/authUrls';
 
-class ReturnBooks extends React.Component {
+class BorrowingHistory extends React.Component {
     constructor(props) {
         super(props);
+        const params = queryString.parse(this.props.location.search.substr(1));
         this.state = {
             books: [],
+            page: parseInt(params.page, 10),
         };
+        if (Number.isInteger(this.state.page) === false) {
+            this.state = { page: 1 };
+        }
         this.requestBooks();
+    }
+
+    componentDidMount() {
+        this.paginator();
     }
 
     requestBooks() {
         const token = localStorage.getItem('token');
         axios({
-            url: `${baseURL}/users/books?returned=false`,
+            url: `${baseURL}/users/books?page=${this.state.page}`,
             method: 'get',
             headers: {
                 accept: 'application/json',
@@ -34,9 +44,10 @@ class ReturnBooks extends React.Component {
             })
             .catch((error) => {
                 if (error.response.status === 404) {
-                    swal('No book under this Borrow Id.', '', 'fail')
+                    swal('No more pages.', '', 'fail')
                         .then(() => {
-                            window.location.replace('/hellobooks');
+                            const prevPage = this.state.page - 1;
+                            window.location.replace(`/hellobooks/my-history?page=${prevPage}`);
                         });
                 } else {
                     swal('An error occured. Please try log in again.', '', 'fail')
@@ -49,8 +60,8 @@ class ReturnBooks extends React.Component {
 
     mapBooks = () => {
         if (this.state.books === undefined || this.state.books < 1) {
-            const BookDetails = (<h3 className='no-content'>No books to return.</h3>);
-            this.state = { bookDetails: BookDetails };
+            const BookDetails = (<h3 className='no-content'>You have not borrowed a book yet.</h3>);
+            this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
                 <div className="panel panel-default" key={book.id}>
@@ -85,12 +96,6 @@ class ReturnBooks extends React.Component {
                                         <th>Date Borrowed:</th>
                                         <td>{book.borrow_date}</td>
                                     </tr>
-                                    <button
-                                        type="button"
-                                        className="btn btn-success"
-                                        onClick={() => { this.returnBookFunc(book.borrow_id); }}>
-                                        Return This Book
-                                    </button>
                                 </tbody>
                             </table>
                         </div>
@@ -101,19 +106,59 @@ class ReturnBooks extends React.Component {
         }
     }
 
-    returnBookFunc = (bookId) => {
-        returnBook(bookId);
+    paginator = () => {
+        const prevPage = this.state.page - 1;
+        const nextPage = this.state.page + 1;
+        if (this.state.page !== 1) {
+            const Paginator = (
+                <ul className="pagination">
+                    <li className="page-item">
+                        <Link
+                            to={`/hellobooks/my-history?page=${prevPage}`}
+                            className="page-link">
+                            Previous
+                        </Link>
+                    </li>
+                    <li className="page-item"><a className="page-link active">Page {this.state.page}</a></li>
+                    <li className="page-item">
+                        <Link
+                            to={`/hellobooks/my-history?page=${nextPage}`}
+                            className="page-link">
+                            Next
+                        </Link>
+                    </li>
+                </ul>
+            );
+            this.setState({ paginator: Paginator });
+        } else {
+            const Paginator = (
+                <ul className="pagination">
+                    <li className="page-item"><a className="page-link active">Page {this.state.page}</a></li>
+                    <li className="page-item">
+                        <Link
+                            to={`/hellobooks/my-history?page=${nextPage}`}
+                            className="page-link">
+                            Next
+                        </Link>
+                    </li>
+                </ul>
+            );
+            this.setState({ paginator: Paginator });
+        }
     }
 
     render() {
         return (
             <div className="col-md-offset-3 col-md-6 view-books">
-                <h3 className='heading'>Books Due</h3>
+                <h3 className='heading'>Your Borrowing History</h3>
                 <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                     { this.state.bookDetails }
                 </div>
+                <nav>
+                    { this.state.paginator }
+                </nav>
             </div>
         );
     }
 }
-export default ReturnBooks;
+export default BorrowingHistory;
