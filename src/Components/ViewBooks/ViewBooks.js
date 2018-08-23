@@ -71,18 +71,18 @@ class ViewBooks extends React.Component {
         const nextPage = this.state.page + 1;
         if (this.state.page !== 1) {
             const Paginator = (
-                <div class="btn-group pagination" role="group" aria-label="Basic example">
+                <div className="btn-group pagination" role="group" aria-label="Basic example">
                     <button
                         type="button"
-                        class="btn btn-light"
+                        clasclassNames="btn btn-light"
                         onClick={() => { this.changePage(prevPage); }}
                     >
                         Previous
                     </button>
-                    <button type="button" class="btn btn-dark" disabled>Page {this.state.page}</button>
+                    <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
                         type="button"
-                        class="btn btn-light"
+                        className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
                     >
                         Next
@@ -92,12 +92,12 @@ class ViewBooks extends React.Component {
             this.setState({ paginator: Paginator });
         } else {
             const Paginator = (
-                <div class="btn-group pagination" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-light" disabled>Previous</button>
-                    <button type="button" class="btn btn-dark" disabled>Page {this.state.page}</button>
+                <div className="btn-group pagination" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-light" disabled>Previous</button>
+                    <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
                         type="button"
-                        class="btn btn-light"
+                        className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
                     >
                         Next
@@ -114,7 +114,7 @@ class ViewBooks extends React.Component {
             this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
-                <tr>
+                <tr key={book.id}>
                     <th scope="row">{book.id}</th>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
@@ -145,8 +145,8 @@ class ViewBooks extends React.Component {
         return (
             <div className="col-md-offset-3 col-md-9 view-books table-responsive">
                 <h3 className='heading'>Available Books</h3>
-                <table class="table table-hover">
-                    <thead class="thead-dark">
+                <table className="table table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">#ID</th>
                             <th scope="col">Title</th>

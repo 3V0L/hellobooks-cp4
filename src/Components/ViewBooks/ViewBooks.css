@@ -29,3 +29,10 @@ tr{
 .change-password {
     margin-top: 140px;
 }
+.err404 {
+    margin-top: 80px;
+    font-size: 96px;
+}
+center {
+    margin-bottom: 60px;
+}

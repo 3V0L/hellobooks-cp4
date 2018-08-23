@@ -70,7 +70,7 @@ class BorrowingHistory extends React.Component {
             this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
-                <tr>
+                <tr key={book.borrow_id}>
                     <th scope="row">{book.borrow_id}</th>
                     <td>{book.book_title}</td>
                     <td>{book.isbn}</td>
@@ -88,18 +88,18 @@ class BorrowingHistory extends React.Component {
         const nextPage = this.state.page + 1;
         if (this.state.page !== 1) {
             const Paginator = (
-                <div class="btn-group pagination" role="group" aria-label="Basic example">
+                <div className="btn-group pagination" role="group" aria-label="Basic example">
                     <button
                         type="button"
-                        class="btn btn-light"
+                        className="btn btn-light"
                         onClick={() => { this.changePage(prevPage); }}
                     >
                         Previous
                     </button>
-                    <button type="button" class="btn btn-dark" disabled>Page {this.state.page}</button>
+                    <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
                         type="button"
-                        class="btn btn-light"
+                        className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
                     >
                         Next
@@ -109,12 +109,12 @@ class BorrowingHistory extends React.Component {
             this.setState({ paginator: Paginator });
         } else {
             const Paginator = (
-                <div class="btn-group pagination" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-light" disabled>Previous</button>
-                    <button type="button" class="btn btn-dark" disabled>Page {this.state.page}</button>
+                <div className="btn-group pagination" role="group" aria-label="Basic example">
+                    <button type="button" className="btn btn-light" disabled>Previous</button>
+                    <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
                         type="button"
-                        class="btn btn-light"
+                        className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
                     >
                         Next
@@ -129,8 +129,8 @@ class BorrowingHistory extends React.Component {
         return (
             <div className="col-md-offset-3 col-md-9 view-books table-responsive">
                 <h3 className='heading'>Available Books</h3>
-                <table class="table table-hover">
-                    <thead class="thead-dark">
+                <table className="table table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">#Borrow ID</th>
                             <th scope="col">Title</th>

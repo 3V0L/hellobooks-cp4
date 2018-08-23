@@ -12,17 +12,11 @@ import ViewBooks from './Components/ViewBooks/ViewBooks';
 import BorrowingHistory from './Components/BorrowingHistory/BorrowingHistory';
 import ReturnBooks from './Components/ReturnBooks/ReturnBooks';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
+import NotFound from './Components/NotFound/NotFound';
 import { checkIfLoggedIn } from './helpers/authUrls';
 
 export default class App extends React.Component {
     render() {
-        // const Routes = () => (
-        //     <Switch>
-        //         <Route path='/auth' component={Auth} />
-        //         <Route path='/hellobooks' component={HelloBooks} />
-        //     </Switch>
-        // );
-
         const Auth = ({ match }) => {
             const authUrls = (
                 <Switch>
@@ -55,6 +49,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route path='/auth' component={Auth} />
                     <Route path='/hellobooks' component={HelloBooks} />
+                    <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
         );
