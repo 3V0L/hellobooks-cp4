@@ -1,6 +1,4 @@
-import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import baseURL from './baseURL';
 
@@ -104,15 +102,21 @@ export const checkIfLoggedIn = (props) => {
     })
         .then((res) => {
             if (res.status === 200) {
-                swal(res.data.message, '', 'warning')
-                    .then(() => {
-                        if (props.history.location.pathname.includes('auth')) {
+                if (props.history.location.pathname.includes('auth')) {
+                    swal(res.data.message, '', 'warning')
+                        .then(() => {
                             props.history.push('/hellobooks/home/1');
-                        }
-                    });
+                        });
+                }
             }
         })
         .catch((err) => {
+            if (props.history.location.pathname.includes('hellobooks')) {
+                swal('You are not logged in', '', 'warning')
+                    .then(() => {
+                        props.history.push('/auth');
+                    });
+            }
         });
 };
 
