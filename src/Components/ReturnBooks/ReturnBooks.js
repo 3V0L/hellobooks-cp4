@@ -36,7 +36,7 @@ class ReturnBooks extends React.Component {
                 if (error.response.status === 404) {
                     swal('No book under this Borrow Id.', '', 'error')
                         .then(() => {
-                            this.props.history.push('/hellobooks/home/1');
+                            this.props.history.push('/home/1');
                         });
                 } else {
                     swal('An error occured. Please try log in again.', '', 'error')

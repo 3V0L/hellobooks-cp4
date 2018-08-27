@@ -60,7 +60,7 @@ class ViewBooks extends React.Component {
     changePage = (pageNum) => {
         this.setState({ page: parseInt(pageNum, 10) },
             () => {
-                this.props.history.push(`/hellobooks/home/${pageNum}`);
+                this.props.history.push(`/home/${pageNum}`);
                 this.requestBooks();
                 this.paginator();
             });

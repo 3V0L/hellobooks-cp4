@@ -43,7 +43,7 @@ class ChangePassword extends React.Component {
                 .then((res) => {
                     swal(res.data.message, '', 'success')
                         .then(() => {
-                            this.props.history.push('/hellobooks/home/1');
+                            this.props.history.push('/home/1');
                         });
                 })
                 .catch((error) => {

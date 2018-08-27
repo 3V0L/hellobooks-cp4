@@ -4,7 +4,7 @@ import baseURL from './baseURL';
 
 const URL = `${baseURL}/auth/`;
 
-export const resetPost = (url, input, redirect, props) => {
+export const resetPost = (url, input, props) => {
     axios({
         url: `${URL}${url}`,
         method: 'post',
@@ -17,7 +17,7 @@ export const resetPost = (url, input, redirect, props) => {
         .then((res) => {
             swal('Success!', `${res.data.message}`, 'success')
                 .then(() => {
-                    props.history.push(`/auth/${redirect}`);
+                    props.history.push('/auth');
                 });
         })
         .catch((error) => {
@@ -29,7 +29,7 @@ export const resetPost = (url, input, redirect, props) => {
         });
 };
 
-export const registerPost = (url, input, redirect, props) => {
+export const registerPost = (url, input, props) => {
     // Warning message for incorrect details entered
     const warning = ('\nName: At least 4 characters/Alphabet Letters only\n\nPassword: At least 6 characters\n\nEmail: Formatted like me@example.com');
     // Axios request
@@ -48,7 +48,7 @@ export const registerPost = (url, input, redirect, props) => {
             } else {
                 swal('Success!', `${res.data.message}`, 'success')
                     .then(() => {
-                        props.history.push(`/auth/${redirect}`);
+                        props.history.push('/auth');
                     });
             }
         })
@@ -62,7 +62,7 @@ export const registerPost = (url, input, redirect, props) => {
         });
 };
 
-export const loginPost = (url, input, redirect, props) => {
+export const loginPost = (url, input, props) => {
     axios({
         url: `${URL}${url}`,
         method: 'post',
@@ -76,7 +76,7 @@ export const loginPost = (url, input, redirect, props) => {
             localStorage.setItem('token', res.data.access_token);
             localStorage.setItem('name', res.data.user);
             localStorage.setItem('admin', res.data.admin);
-            window.location.replace(`/${redirect}`);
+            props.history.push('/home/1');
         })
         .catch((error) => {
             if (error.response) {
@@ -102,18 +102,21 @@ export const checkIfLoggedIn = (props) => {
     })
         .then((res) => {
             if (res.status === 200) {
+                localStorage.setItem('isAllowed', true);
                 if (props.history.location.pathname.includes('auth')) {
                     swal(res.data.message, '', 'warning')
                         .then(() => {
-                            props.history.push('/hellobooks/home/1');
+                            props.history.push('/home/1');
                         });
                 }
             }
         })
         .catch((err) => {
-            if (props.history.location.pathname.includes('hellobooks')) {
+            localStorage.setItem('isAllowed', false);
+            if (!props.history.location.pathname.includes('auth')) {
                 swal('You are not logged in', '', 'warning')
                     .then(() => {
+                        localStorage.clear();
                         props.history.push('/auth');
                     });
             }

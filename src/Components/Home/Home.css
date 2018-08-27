@@ -8,9 +8,6 @@
     border: 1px solid #000;
     background-color: #fff;
 }
-body{
-    background-image: url('./background.jpeg');
-}
 .login-form {
     margin-bottom: 15px;
 }

@@ -58,7 +58,7 @@ class BorrowingHistory extends React.Component {
     changePage = (pageNum) => {
         this.setState({ page: parseInt(pageNum, 10) },
             () => {
-                this.props.history.push(`/hellobooks/my-history/${pageNum}`);
+                this.props.history.push(`/my-history/${pageNum}`);
                 this.requestBooks();
                 this.paginator();
             });
@@ -128,7 +128,7 @@ class BorrowingHistory extends React.Component {
     render() {
         return (
             <div className="col-md-offset-3 col-md-9 view-books table-responsive">
-                <h3 className='heading'>Available Books</h3>
+                <h3 className='heading'>Borrowing History</h3>
                 <table className="table table-hover">
                     <thead className="thead-dark">
                         <tr>

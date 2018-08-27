@@ -28,7 +28,7 @@ const UserNav = (
             <ul className="nav navbar-nav navbar-right">
                 <li className="nav-item">
                     <Link
-                        to="/hellobooks/home/1"
+                        to="/home/1"
                         className="nav-link">
                         Home
                     </Link>
@@ -36,21 +36,21 @@ const UserNav = (
                 {AdminNav}
                 <li className="nav-item">
                     <Link
-                        to="/hellobooks/my-history/1"
+                        to="/my-history/1"
                         className="nav-link">
                         My Borrowing history
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link
-                        to="/hellobooks/return"
+                        to="/return"
                         className="nav-link">
                         Return Book
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link
-                        to="/hellobooks/change-password"
+                        to="/change-password"
                         className="nav-link">
                         Change Password
                     </Link>
