@@ -3,6 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
+import './ChangePassword.css';
 import { Logout } from '../../helpers/authUrls';
 
 class ChangePassword extends React.Component {
@@ -69,51 +70,69 @@ class ChangePassword extends React.Component {
     render() {
         return (
             <div className='home view-books change-password'>
-                <div className='card'>
-                    <div className='card-header'>
-                        <h3>Change Password</h3>
+                <div className='card profile container-fluid'>
+                    <div className='card-header row'>
+                        <h3>User Profile</h3>
                     </div>
-                    <div className='card-body'>
-                        <form onSubmit={this.submitForm} className='login-form'>
-                            <div className="form-group">
-                                <label for="email">Old Password</label>
-                                <input
-                                    type="password"
-                                    name="oldPassword"
-                                    value={this.state.oldPassword}
-                                    onChange={this.handleChange}
-                                    className="form-control"
-                                    placeholder="Enter Old Password"
-                                    required/>
-                            </div>
-                            <br/>
-                            <div className="form-group">
-                                <label for="newPassword">New Password</label>
-                                <input
-                                    type="password"
-                                    name="newPassword"
-                                    value={this.state.newPassword}
-                                    onChange={this.handleChange}
-                                    className="form-control"
-                                    placeholder="Enter New Password"
-                                    required/>
-                            </div>
-                            <div className="form-group">
-                                <label for="confirmPassword">Confirm New Password</label>
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    value={this.state.confirmPassword}
-                                    onChange={this.handleChange}
-                                    className="form-control"
-                                    placeholder="Confirm New Password"
-                                    required/>
-                            </div>
-                            <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
-                        </form>
+                    <div className='card-body row'>
+                        <div className="col-md-4 details">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSghLIYuD9D10fF6efoy-IU6r1ZDYtjKxJEBhTaQ_i_EV8C5waw"
+                                className="rounded-circle"
+                                width="300"
+                                height="300"
+                                alt=''/>
+                            <p>
+                                <h4>
+                                    <b>Name:</b> {localStorage.getItem('name')}
+                                    <br />
+                                    <b>Role:</b> {localStorage.getItem('isAdmin') ? 'Administrator' : 'User'}
+                                </h4>
+                            </p>
+                        </div>
+                        <div className="col-md-6 password-form">
+                            <h3>Change Password</h3>
+                            <form onSubmit={this.submitForm} className='login-form'>
+                                <div className="form-group">
+                                    <label for="email">Old Password</label>
+                                    <input
+                                        type="password"
+                                        name="oldPassword"
+                                        value={this.state.oldPassword}
+                                        onChange={this.handleChange}
+                                        className="form-control"
+                                        placeholder="Enter Old Password"
+                                        required/>
+                                </div>
+                                <br/>
+                                <div className="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input
+                                        type="password"
+                                        name="newPassword"
+                                        value={this.state.newPassword}
+                                        onChange={this.handleChange}
+                                        className="form-control"
+                                        placeholder="Enter New Password"
+                                        required/>
+                                </div>
+                                <div className="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input
+                                        type="password"
+                                        name="confirmPassword"
+                                        value={this.state.confirmPassword}
+                                        onChange={this.handleChange}
+                                        className="form-control"
+                                        placeholder="Confirm New Password"
+                                        required/>
+                                </div>
+                                <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
         );
     }
 }
