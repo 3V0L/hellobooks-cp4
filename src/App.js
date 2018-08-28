@@ -24,6 +24,7 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route exact path='/' render={() => <Redirect to="/auth"/>}/>
                     <Route exact path='/auth' component={Home} />
                     <Route exact path={'/auth-register'} component={Register} />
                     <Route exact path={'/auth-reset-password'} component={ResetPassword} />

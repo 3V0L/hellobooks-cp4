@@ -104,7 +104,7 @@ export const checkIfLoggedIn = (props) => {
             if (res.status === 200) {
                 localStorage.setItem('isAllowed', true);
                 if (props.history.location.pathname.includes('auth')) {
-                    swal(res.data.message, '', 'warning')
+                    swal('You are logged in.', '', 'info')
                         .then(() => {
                             props.history.push('/home/1');
                         });
