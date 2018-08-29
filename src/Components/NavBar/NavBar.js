@@ -13,6 +13,11 @@ class NavBar extends React.Component {
                     Admin Actions
                     </a>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <Link
+                            to="/add-book"
+                            className="dropdown-item">
+                            Add Book
+                        </Link>
                         <a className="dropdown-item" href="">View All Users</a>
                         <a className="dropdown-item" href="">View All Books Loaned Out</a>
                     </div>

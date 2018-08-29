@@ -21,6 +21,7 @@ class Register extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         registerPost('register', this.state, this.props);
+        this.setState({ password: '' });
     }
 
     render() {

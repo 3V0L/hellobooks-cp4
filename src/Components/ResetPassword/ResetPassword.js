@@ -19,6 +19,7 @@ class ResetPassword extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         resetPost('reset-password', this.state, this.props);
+        this.setState({ email: '' });
     }
 
     render() {

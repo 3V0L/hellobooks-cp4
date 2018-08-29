@@ -1,0 +1,17 @@
+.book-card {
+    margin-top: 80px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    height: 1000px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+.help-block {
+    font-size: 13px;
+    color: gray;
+}
+textarea {
+    resize: none;
+}

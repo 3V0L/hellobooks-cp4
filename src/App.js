@@ -14,6 +14,8 @@ import ReturnBooks from './Components/ReturnBooks/ReturnBooks';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import NotFound from './Components/NotFound/NotFound';
 import { checkIfLoggedIn } from './helpers/authUrls';
+import EditBook from './Components/EditBook/EditBook';
+import AddBook from './Components/AddBook/AddBook';
 
 export default class App extends React.Component {
     render() {
@@ -36,6 +38,8 @@ export default class App extends React.Component {
                             <ProtectedRoute exact path={'/my-history/:page'} component={BorrowingHistory} />
                             <ProtectedRoute exact path={'/return'} component={ReturnBooks} />
                             <ProtectedRoute exact path={'/change-password'} component={ChangePassword} />
+                            <ProtectedRoute exact path={'/edit-book/:bookId'} component={EditBook} />
+                            <ProtectedRoute exact path={'/add-book'} component={AddBook} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

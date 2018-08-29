@@ -18,14 +18,14 @@ class ViewBooks extends React.Component {
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
             this.state = { page: 1 };
         }
-        this.requestBooks();
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
+        this.requestBooks();
         this.paginator();
     }
 
-    requestBooks() {
+    requestBooks = () => {
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/books?page=${this.state.page}`,
@@ -136,7 +136,7 @@ class ViewBooks extends React.Component {
                                 <button
                                     type="button"
                                     className="btn btn-success btn-sm admin-btn"
-                                    // onClick={() => }
+                                    onClick={() => this.props.history.push(`/edit-book/${book.id}`) }
                                 >
                                     Edit
                                 </button>
