@@ -93,7 +93,7 @@ class ChangePassword extends React.Component {
                             <h3>Change Password</h3>
                             <form onSubmit={this.submitForm} className='login-form'>
                                 <div className="form-group">
-                                    <label for="email">Old Password</label>
+                                    <label htmlFor="email">Old Password</label>
                                     <input
                                         type="password"
                                         name="oldPassword"
@@ -105,7 +105,7 @@ class ChangePassword extends React.Component {
                                 </div>
                                 <br/>
                                 <div className="form-group">
-                                    <label for="newPassword">New Password</label>
+                                    <label htmlFor="newPassword">New Password</label>
                                     <input
                                         type="password"
                                         name="newPassword"
@@ -116,7 +116,7 @@ class ChangePassword extends React.Component {
                                         required/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <label htmlFor="confirmPassword">Confirm New Password</label>
                                     <input
                                         type="password"
                                         name="confirmPassword"

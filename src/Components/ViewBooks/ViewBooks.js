@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import { borrowBook } from '../../helpers/borrowUrls';
 import './ViewBooks.css';
+import { deleteBook } from '../../helpers/adminUrls';
 import { Logout } from '../../helpers/authUrls';
 
 class ViewBooks extends React.Component {
@@ -130,6 +131,24 @@ class ViewBooks extends React.Component {
                             onClick={() => { this.borrowBookFunction(book.id); }}>
                             Borrow this book
                         </button>
+                        { localStorage.getItem('admin') === 'true'
+                            ? <div className='admin-actions'>
+                                <button
+                                    type="button"
+                                    className="btn btn-success btn-sm admin-btn"
+                                    // onClick={() => }
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => deleteBook(book.id, book.title, this.props)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                            : ''}
                     </td>
                 </tr>
             ));

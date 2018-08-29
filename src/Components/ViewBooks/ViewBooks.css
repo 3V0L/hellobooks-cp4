@@ -36,3 +36,9 @@ tr{
 center {
     margin-bottom: 60px;
 }
+.admin-btn {
+    margin-right: 40px;
+}
+.admin-actions {
+    margin-top: 20px;   
+}

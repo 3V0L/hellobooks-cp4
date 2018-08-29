@@ -32,7 +32,7 @@ class ResetPassword extends React.Component {
                     <div className='card-body'>
                         <form onSubmit={this.submitForm} className='login-form'>
                             <div className="form-group">
-                                <label for="email">Email address</label>
+                                <label htmlFor="email">Email address</label>
                                 <input
                                     type="email"
                                     name="email"
