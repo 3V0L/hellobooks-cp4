@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
 import './ChangePassword.css';
-import { Logout } from '../../helpers/authUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class ChangePassword extends React.Component {
     state = {
@@ -12,6 +12,10 @@ class ChangePassword extends React.Component {
         newPassword: '',
         confirmPassword: '',
     };
+
+    componentWillMount() {
+        checkIfLoggedIn(this.props);
+    }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });

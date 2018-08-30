@@ -8,19 +8,12 @@ class NavBar extends React.Component {
         let AdminNav = '';
         if (localStorage.getItem('admin') === 'true') {
             AdminNav = (
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Admin Actions
-                    </a>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <Link
-                            to="/add-book"
-                            className="dropdown-item">
-                            Add Book
-                        </Link>
-                        <a className="dropdown-item" href="">View All Users</a>
-                        <a className="dropdown-item" href="">View All Books Loaned Out</a>
-                    </div>
+                <li className="nav-item">
+                    <Link
+                        to="/add-book"
+                        className="nav-link">
+                        Add Book
+                    </Link>
                 </li>
             );
         }
