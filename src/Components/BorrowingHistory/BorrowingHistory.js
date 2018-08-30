@@ -16,10 +16,10 @@ class BorrowingHistory extends React.Component {
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
             this.state = { page: 1 };
         }
-        this.requestBooks();
     }
 
     componentDidMount() {
+        this.requestBooks();
         this.paginator();
     }
 

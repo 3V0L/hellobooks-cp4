@@ -11,7 +11,11 @@ class ReturnBooks extends React.Component {
         super(props);
         this.state = {
             books: [],
+            bookDetails: '',
         };
+    }
+
+    componentDidMount() {
         this.requestBooks();
     }
 

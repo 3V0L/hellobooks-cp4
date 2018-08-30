@@ -56,7 +56,6 @@ class EditBook extends React.Component {
                 }
             })
             .catch((error) => {
-                console.log(error.response.status);
                 if (error.response.status === 404) {
                     swal(error.response.data.message, '', 'error')
                         .then(() => { this.props.history.push('/home/1'); });

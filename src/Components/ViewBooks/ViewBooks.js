@@ -20,7 +20,7 @@ class ViewBooks extends React.Component {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.requestBooks();
         this.paginator();
     }
