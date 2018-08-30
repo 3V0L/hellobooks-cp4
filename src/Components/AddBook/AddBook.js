@@ -78,7 +78,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                 4 - 25 characters. No special characters (e.g. !,@,#,? etc)
                                 </span>
                             </div>
@@ -92,7 +92,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                 4 - 25 text only characters (a-z, A-Z)
                                 </span>
                             </div>
@@ -106,7 +106,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                     4 - 20 text only characters (a-z, A-Z)
                                 </span>
                             </div>
@@ -120,7 +120,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                 13 Digit ISBN number with no special characters (e.g 1234567891011)
                                 </span>
                             </div>
@@ -134,7 +134,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                 Positive numbers only
                                 </span>
                             </div>
@@ -158,7 +158,7 @@ class AddBook extends React.Component {
                                     onChange={this.handleChange}
                                     className="form-control"
                                     required/>
-                                <span class="help-block">
+                                <span className="help-block">
                                 4 - 200 Characters. All types of characters allowed
                                 </span>
                             </div>
