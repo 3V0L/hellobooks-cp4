@@ -1,0 +1,44 @@
+body{
+    background-color: #efefef;
+    background-image: none;
+}
+.view-books {
+    margin: 60px auto;
+}
+table#table1{
+    width: 100%;
+    margin-bottom: 14px;
+}
+.btn{
+    color: white;
+}
+.btn-light{
+    color: black;
+}
+.pagination{
+    display: -ms-grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+tr{
+    background-color: white;
+    border: solid;
+    border-width: 15px 0;
+    border-color: #efefef;
+}
+.change-password {
+    margin-top: 140px;
+}
+.err404 {
+    margin-top: 80px;
+    font-size: 96px;
+}
+center {
+    margin-bottom: 60px;
+}
+.admin-btn {
+    margin-right: 40px;
+}
+.admin-actions {
+    margin-top: 20px;   
+}

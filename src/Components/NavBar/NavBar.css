@@ -1,0 +1,17 @@
+.navbar {
+    min-height: 65px;
+    font-size: 25px;
+    color: white;
+    margin-bottom: 200px;
+    background-color: black;
+}
+.nav-link{
+    color: white;
+    margin-left: 6px;
+}
+.nav-link:hover {
+    opacity: 1;
+    border-bottom: 2px solid #fff;
+    text-decoration: none; 
+    margin-top: -2px;
+} 
