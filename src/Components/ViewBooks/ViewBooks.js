@@ -4,7 +4,8 @@ import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import { borrowBook } from '../../helpers/borrowUrls';
 import './ViewBooks.css';
-import { Logout } from '../../helpers/authUrls';
+import { deleteBook } from '../../helpers/adminUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class ViewBooks extends React.Component {
     constructor(props) {
@@ -17,14 +18,15 @@ class ViewBooks extends React.Component {
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
             this.state = { page: 1 };
         }
-        this.requestBooks();
     }
 
     componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
+        this.requestBooks();
         this.paginator();
     }
 
-    requestBooks() {
+    requestBooks = () => {
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/books?page=${this.state.page}`,
@@ -93,9 +95,10 @@ class ViewBooks extends React.Component {
         } else {
             const Paginator = (
                 <div className="btn-group pagination" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-light" disabled>Previous</button>
+                    <button id='previous' type="button" className="btn btn-light" disabled>Previous</button>
                     <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
+                        id='next'
                         type="button"
                         className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
@@ -125,11 +128,32 @@ class ViewBooks extends React.Component {
                     <td>{book.copies}</td>
                     <td>
                         <button
+                            id='borrowBook'
                             type="button"
                             className="btn btn-info"
                             onClick={() => { this.borrowBookFunction(book.id); }}>
                             Borrow this book
                         </button>
+                        { localStorage.getItem('admin') === 'true'
+                            ? <div className='admin-actions'>
+                                <button
+                                    id='editBook'
+                                    type="button"
+                                    className="btn btn-success btn-sm admin-btn"
+                                    onClick={() => this.props.history.push(`/edit-book/${book.id}`) }
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    id='deleteBook'
+                                    type="button"
+                                    className="btn btn-danger btn-sm"
+                                    onClick={() => deleteBook(book.id, book.title, this.props)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                            : ''}
                     </td>
                 </tr>
             ));

@@ -13,7 +13,8 @@ import BorrowingHistory from './Components/BorrowingHistory/BorrowingHistory';
 import ReturnBooks from './Components/ReturnBooks/ReturnBooks';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import NotFound from './Components/NotFound/NotFound';
-import { checkIfLoggedIn } from './helpers/authUrls';
+import EditBook from './Components/EditBook/EditBook';
+import AddBook from './Components/AddBook/AddBook';
 
 export default class App extends React.Component {
     render() {
@@ -24,17 +25,19 @@ export default class App extends React.Component {
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route exact path='/' render={() => <Redirect to="/auth"/>}/>
                     <Route exact path='/auth' component={Home} />
                     <Route exact path={'/auth-register'} component={Register} />
                     <Route exact path={'/auth-reset-password'} component={ResetPassword} />
                     <div>
-                        <NavBar />
-                        { checkIfLoggedIn(this.props) }
+                        <NavBar props={this.props}/>
                         <Switch>
                             <ProtectedRoute exact path={'/home/:page'} component={ViewBooks} />
                             <ProtectedRoute exact path={'/my-history/:page'} component={BorrowingHistory} />
                             <ProtectedRoute exact path={'/return'} component={ReturnBooks} />
                             <ProtectedRoute exact path={'/change-password'} component={ChangePassword} />
+                            <ProtectedRoute exact path={'/edit-book/:bookId'} component={EditBook} />
+                            <ProtectedRoute exact path={'/add-book'} component={AddBook} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

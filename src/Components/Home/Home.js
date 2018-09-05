@@ -12,8 +12,8 @@ class Home extends React.Component {
         };
     }
 
-    componentWillMount() {
-        checkIfLoggedIn(this.props);
+    componentDidMount() {
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {
@@ -23,6 +23,10 @@ class Home extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         loginPost('login', this.state, this.props);
+        this.setState({
+            email: '',
+            password: '',
+        });
     }
 
     render() {
@@ -36,7 +40,7 @@ class Home extends React.Component {
                     <div className='card-body'>
                         <form onSubmit={this.submitForm} className='login-form'>
                             <div className="form-group">
-                                <label for="email">Email address</label>
+                                <label htmlFor="email">Email address</label>
                                 <input
                                     type="email"
                                     name="email"
@@ -47,7 +51,7 @@ class Home extends React.Component {
                                     required/>
                             </div>
                             <div className="form-group">
-                                <label for="password">Password</label>
+                                <label htmlFor="password">Password</label>
                                 <input
                                     type="password"
                                     name="password"

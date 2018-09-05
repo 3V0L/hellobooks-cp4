@@ -9,7 +9,7 @@ class ResetPassword extends React.Component {
     };
 
     componentWillMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {
@@ -19,6 +19,7 @@ class ResetPassword extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         resetPost('reset-password', this.state, this.props);
+        this.setState({ email: '' });
     }
 
     render() {
@@ -32,7 +33,7 @@ class ResetPassword extends React.Component {
                     <div className='card-body'>
                         <form onSubmit={this.submitForm} className='login-form'>
                             <div className="form-group">
-                                <label for="email">Email address</label>
+                                <label htmlFor="email">Email address</label>
                                 <input
                                     type="email"
                                     name="email"

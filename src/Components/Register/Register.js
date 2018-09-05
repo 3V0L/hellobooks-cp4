@@ -11,7 +11,7 @@ class Register extends React.Component {
     };
 
     componentWillMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {
@@ -21,6 +21,7 @@ class Register extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         registerPost('register', this.state, this.props);
+        this.setState({ password: '' });
     }
 
     render() {
@@ -34,7 +35,7 @@ class Register extends React.Component {
                     <div className='card-body'>
                         <form onSubmit={this.submitForm} className='login-form'>
                             <div className='form-group'>
-                                <label for="name">Name</label>
+                                <label htmlFor="name">Name</label>
                                 <input
                                     type="text"
                                     name="name"
@@ -45,7 +46,7 @@ class Register extends React.Component {
                                     required/>
                             </div>
                             <div className="form-group">
-                                <label for="email">Email address</label>
+                                <label htmlFor="email">Email address</label>
                                 <input
                                     type="email"
                                     name="email"
@@ -56,7 +57,7 @@ class Register extends React.Component {
                                     required/>
                             </div>
                             <div className="form-group">
-                                <label for="password">Password</label>
+                                <label htmlFor="password">Password</label>
                                 <input
                                     type="password"
                                     name="password"
@@ -66,7 +67,7 @@ class Register extends React.Component {
                                     className="form-control"
                                     required/>
                             </div>
-                            <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                            <button id='submit' type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Back to Login</Link>
