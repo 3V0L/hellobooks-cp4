@@ -1,11 +1,14 @@
+import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
+import baseURL from './baseURL';
 
-const baseURL = 'http://0.0.0.0:5000/api/v1/auth/';
+const URL = `${baseURL}/auth/`;
 
-export const resetPost = (url, input, redirect) => {
+export const resetPost = (url, input, redirect, props) => {
     axios({
-        url: `${baseURL}${url}`,
+        url: `${URL}${url}`,
         method: 'post',
         data: input,
         headers: {
@@ -16,7 +19,7 @@ export const resetPost = (url, input, redirect) => {
         .then((res) => {
             swal('Success!', `${res.data.message}`, 'success')
                 .then(() => {
-                    window.location.replace(`/auth/${redirect}`);
+                    props.history.push(`/auth/${redirect}`);
                 });
         })
         .catch((error) => {
@@ -28,12 +31,12 @@ export const resetPost = (url, input, redirect) => {
         });
 };
 
-export const registerPost = (url, input, redirect) => {
+export const registerPost = (url, input, redirect, props) => {
     // Warning message for incorrect details entered
     const warning = ('\nName: At least 4 characters/Alphabet Letters only\n\nPassword: At least 6 characters\n\nEmail: Formatted like me@example.com');
     // Axios request
     axios({
-        url: `${baseURL}${url}`,
+        url: `${URL}${url}`,
         method: 'post',
         data: input,
         headers: {
@@ -47,7 +50,7 @@ export const registerPost = (url, input, redirect) => {
             } else {
                 swal('Success!', `${res.data.message}`, 'success')
                     .then(() => {
-                        window.location.replace(`/auth/${redirect}`);
+                        props.history.push(`/auth/${redirect}`);
                     });
             }
         })
@@ -56,14 +59,14 @@ export const registerPost = (url, input, redirect) => {
                 `Registration Failed, Please ensure your info is in the following formats:\n${warning}`,
                 'warning')
                 .then(() => {
-                    window.location.replace('/auth/register');
+                    props.history.push('/auth/register');
                 });
         });
 };
 
-export const loginPost = (url, input, redirect) => {
+export const loginPost = (url, input, redirect, props) => {
     axios({
-        url: `${baseURL}${url}`,
+        url: `${URL}${url}`,
         method: 'post',
         data: input,
         headers: {
@@ -82,16 +85,16 @@ export const loginPost = (url, input, redirect) => {
                 swal('Login Failed', 'Ensure all your details are correct and try again.', 'warning')
                     .then(() => {
                         localStorage.clear();
-                        window.location.replace('/auth');
+                        props.history.push('/auth');
                     });
             }
         });
 };
 
-export const checkIfLoggedIn = () => {
+export const checkIfLoggedIn = (props) => {
     const token = localStorage.getItem('token');
     axios({
-        url: `${baseURL}login_check`,
+        url: `${URL}login_check`,
         method: 'get',
         headers: {
             accept: 'application/json',
@@ -101,20 +104,22 @@ export const checkIfLoggedIn = () => {
     })
         .then((res) => {
             if (res.status === 200) {
-                swal(res.data.message, 'Log Out to access this page', 'warning')
+                swal(res.data.message, '', 'warning')
                     .then(() => {
-                        window.location.replace('/hellobooks');
+                        if (props.history.location.pathname.includes('auth')) {
+                            props.history.push('/hellobooks/home/1');
+                        }
                     });
             }
         })
-        .catch(() => {
+        .catch((err) => {
         });
 };
 
-export const Logout = () => {
+export const Logout = (props) => {
     const token = localStorage.getItem('token');
     axios({
-        url: `${baseURL}logout`,
+        url: `${URL}logout`,
         method: 'post',
         data: { '': '' },
         headers: {
@@ -128,11 +133,11 @@ export const Logout = () => {
             swal(res.data.message, '', 'success')
                 .then(() => {
                     localStorage.clear();
-                    window.location.replace('/auth');
+                    props.history.push('/auth');
                 });
         })
-        .catch((error) => {
+        .catch(() => {
             localStorage.clear();
-            window.location.replace('/auth');
+            props.history.push('/auth');
         });
 };

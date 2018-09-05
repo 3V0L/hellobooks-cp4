@@ -19,27 +19,46 @@ if (localStorage.getItem('admin') === 'true') {
 }
 
 const UserNav = (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a className="navbar-brand" href=""><h2>HelloBooks</h2></a>
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
+        <h2>HelloBooks</h2>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
             <ul className="nav navbar-nav navbar-right">
                 <li className="nav-item">
-                    <a className="nav-link" href="">Home</a>
+                    <Link
+                        to="/hellobooks/home/1"
+                        className="nav-link">
+                        Home
+                    </Link>
                 </li>
                 {AdminNav}
                 <li className="nav-item">
-                    <a className="nav-link" href="">My Borrowing history</a>
+                    <Link
+                        to="/hellobooks/my-history/1"
+                        className="nav-link">
+                        My Borrowing history
+                    </Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="">Change Password</a>
+                    <Link
+                        to="/hellobooks/return"
+                        className="nav-link">
+                        Return Book
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link
+                        to="/hellobooks/change-password"
+                        className="nav-link">
+                        Change Password
+                    </Link>
                 </li>
                 <li>
                     <Link
-                        to="/hellobooks"
-                        onClick={Logout}
+                        to="/auth"
+                        onClick={() => { Logout(this.props); } }
                         className="nav-link">
                         Log Out
                     </Link>

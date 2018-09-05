@@ -11,6 +11,7 @@ module.exports =
       "one-var": 0,
       "one-var-declaration-per-line": 0,
       "new-cap": 0,
+      "arrow-body-style": ["error", "as-needed"],
       "indent": ["error", 4],
       "consistent-return": 0,
       "no-param-reassign": 0,

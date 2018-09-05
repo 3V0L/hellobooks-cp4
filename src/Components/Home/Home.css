@@ -1,5 +1,5 @@
 .card {
-    margin-top: 60px;
+    margin-top: 80px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -8,11 +8,16 @@
     border: 1px solid #000;
     background-color: #fff;
 }
+body{
+    background-image: url('./background.jpeg');
+}
 .login-form {
     margin-bottom: 15px;
 }
 .card-header {
     text-align: center;
+    color: white;
+    background-color: black;
 }
 .footer-card {
     margin: auto;
