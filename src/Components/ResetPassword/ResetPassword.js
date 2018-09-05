@@ -18,7 +18,7 @@ class ResetPassword extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        resetPost('reset-password', this.state, '', this.props);
+        resetPost('reset-password', this.state, this.props);
     }
 
     render() {
@@ -47,7 +47,7 @@ class ResetPassword extends React.Component {
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Login</Link>
                             <br />
-                            <Link to="/auth/register" className='link'>Register</Link>
+                            <Link to="/auth-register" className='link'>Register</Link>
                         </div>
                     </div>
                 </div>

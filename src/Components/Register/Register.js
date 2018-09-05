@@ -20,7 +20,7 @@ class Register extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        registerPost('register', this.state, '', this.props);
+        registerPost('register', this.state, this.props);
     }
 
     render() {
@@ -71,7 +71,7 @@ class Register extends React.Component {
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Back to Login</Link>
                             <br />
-                            <Link to="/auth/reset-password" className='link'>Forgot My Password</Link>
+                            <Link to="/auth-reset-password" className='link'>Forgot My Password</Link>
                         </div>
                     </div>
                 </div>

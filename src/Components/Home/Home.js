@@ -22,7 +22,7 @@ class Home extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        loginPost('login', this.state, 'hellobooks/home/1', this.props);
+        loginPost('login', this.state, this.props);
     }
 
     render() {
@@ -60,9 +60,9 @@ class Home extends React.Component {
                             <button type="submit" className="btn btn-dark btn-lg btn-block">Login</button>
                         </form>
                         <div className='footer-card'>
-                            <Link to="/auth/register" className='link'>Register</Link>
+                            <Link to="/auth-register" className='link'>Register</Link>
                             <br />
-                            <Link to="/auth/reset-password" className='link'>Forgot My Password</Link>
+                            <Link to="/auth-reset-password" className='link'>Forgot My Password</Link>
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,7 @@ class ReturnBooks extends React.Component {
                 if (error.response.status === 404) {
                     swal('No book under this Borrow Id.', '', 'error')
                         .then(() => {
-                            this.props.history.push('/hellobooks/home/1');
+                            this.props.history.push('/home/1');
                         });
                 } else {
                     swal('An error occured. Please try log in again.', '', 'error')
@@ -53,7 +53,7 @@ class ReturnBooks extends React.Component {
             this.setState({ bookDetails: BookDetails });
         } else {
             const BookDetails = this.state.books.map(book => (
-                <tr>
+                <tr key={book.borrow_id}>
                     <th scope="row">{book.borrow_id}</th>
                     <td>{book.book_title}</td>
                     <td>{book.isbn}</td>
@@ -82,8 +82,8 @@ class ReturnBooks extends React.Component {
         return (
             <div className="col-md-offset-3 col-md-9 view-books table-responsive">
                 <h3 className='heading'>Books Due</h3>
-                <table class="table table-hover">
-                    <thead class="thead-dark">
+                <table className="table table-hover">
+                    <thead className="thead-dark">
                         <tr>
                             <th scope="col">#Borrow ID</th>
                             <th scope="col">Title</th>
