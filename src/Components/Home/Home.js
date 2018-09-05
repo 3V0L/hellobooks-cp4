@@ -12,8 +12,8 @@ class Home extends React.Component {
         };
     }
 
-    componentWillMount() {
-        checkIfLoggedIn(this.props);
+    componentDidMount() {
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {

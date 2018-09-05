@@ -28,7 +28,7 @@ class EditBook extends React.Component {
     }
 
     componentDidMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, 'auth');
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/books/${parseInt(this.props.match.params.bookId, 10)}`,

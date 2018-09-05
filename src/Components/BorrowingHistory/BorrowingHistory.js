@@ -3,7 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
-import { Logout } from '../../helpers/authUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class BorrowingHistory extends React.Component {
     constructor(props) {
@@ -19,6 +19,7 @@ class BorrowingHistory extends React.Component {
     }
 
     componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
         this.requestBooks();
         this.paginator();
     }
@@ -113,6 +114,7 @@ class BorrowingHistory extends React.Component {
                     <button type="button" className="btn btn-light" disabled>Previous</button>
                     <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
+                        id='next'
                         type="button"
                         className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}

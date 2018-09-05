@@ -17,8 +17,8 @@ class AddBook extends React.Component {
         copies: ''
     };
 
-    componentWillMount() {
-        checkIfLoggedIn(this.props);
+    componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
     }
 
     handleChange = (e) => {
@@ -85,6 +85,7 @@ class AddBook extends React.Component {
                             <div className='form-group'>
                                 <label htmlFor="author">Author</label>
                                 <input
+                                    id='author'
                                     type="text"
                                     name="author"
                                     placeholder="Enter Author"

@@ -3,7 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
-import { Logout } from '../../helpers/authUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 import { returnBook } from '../../helpers/borrowUrls';
 
 class ReturnBooks extends React.Component {
@@ -16,6 +16,7 @@ class ReturnBooks extends React.Component {
     }
 
     componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
         this.requestBooks();
     }
 

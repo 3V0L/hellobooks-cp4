@@ -13,8 +13,8 @@ class ChangePassword extends React.Component {
         confirmPassword: '',
     };
 
-    componentWillMount() {
-        checkIfLoggedIn(this.props);
+    componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
     }
 
     handleChange = (e) => {
@@ -99,6 +99,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="email">Old Password</label>
                                     <input
+                                        id='oldPassword'
                                         type="password"
                                         name="oldPassword"
                                         value={this.state.oldPassword}
@@ -111,6 +112,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="newPassword">New Password</label>
                                     <input
+                                        id='newPassword'
                                         type="password"
                                         name="newPassword"
                                         value={this.state.newPassword}
@@ -122,6 +124,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="confirmPassword">Confirm New Password</label>
                                     <input
+                                        id='confirmPassword'
                                         type="password"
                                         name="confirmPassword"
                                         value={this.state.confirmPassword}
@@ -130,7 +133,7 @@ class ChangePassword extends React.Component {
                                         placeholder="Confirm New Password"
                                         required/>
                                 </div>
-                                <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+                                <button id='submitPassword' type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
                             </form>
                         </div>
                     </div>

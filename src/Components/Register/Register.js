@@ -11,7 +11,7 @@ class Register extends React.Component {
     };
 
     componentWillMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {

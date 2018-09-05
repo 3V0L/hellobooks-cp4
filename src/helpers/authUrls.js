@@ -89,7 +89,7 @@ export const loginPost = (url, input, props) => {
         });
 };
 
-export const checkIfLoggedIn = (props) => {
+export const checkIfLoggedIn = (props, redirect) => {
     const token = localStorage.getItem('token');
     axios({
         url: `${URL}login_check`,
@@ -113,7 +113,7 @@ export const checkIfLoggedIn = (props) => {
         })
         .catch((err) => {
             localStorage.setItem('isAllowed', false);
-            if (!props.history.location.pathname.includes('auth')) {
+            if (redirect.length > 1) {
                 swal('You are not logged in', '', 'warning')
                     .then(() => {
                         localStorage.clear();
