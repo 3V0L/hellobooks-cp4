@@ -1,11 +1,13 @@
 {
   "name": "hellobooks-cp4",
   "version": "0.1.0",
+  "homepage": "https://hellobooks-cp4.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.1",
     "@material-ui/icons": "^2.0.0",
     "axios": "^0.18.0",
+    "coveralls": "^3.0.2",
     "enzyme": "^3.5.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "history": "^4.7.2",
@@ -20,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --coverage a",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coveralls": "react-scripts test --env=jsdom --coverage a --coverageReporters=text-lcov | coveralls"
   },
   "description": "This is the front-end to the [HelloBooks-API](https://github.com/3V0L/hellobooks_api) that I made using Python. The front end will be connected to a hosted version of the API that can be found on [Heroku](https://hellobooks-tapiwa.herokuapp.com/). This app will be done in ReactJS and will make use of HTML, CSS and Javascript to create a responsive front end application which connects to the above mentioned API.",
   "main": "index.js",

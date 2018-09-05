@@ -9,4 +9,4 @@ const localStorageMock = {
     clear: jest.fn()
 };
 global.localStorage = localStorageMock;
-console.warn = () => {};
+console.error = () => {};
