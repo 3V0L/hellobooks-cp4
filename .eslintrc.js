@@ -1,7 +1,7 @@
 module.exports = 
   {
     "root": true,
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "react-app"],
     "env": {
       "node": true,
       "es6": true,
@@ -11,6 +11,7 @@ module.exports =
       "one-var": 0,
       "one-var-declaration-per-line": 0,
       "new-cap": 0,
+      "indent": ["error", 4],
       "consistent-return": 0,
       "no-param-reassign": 0,
       "comma-dangle": 0,
@@ -25,9 +26,9 @@ module.exports =
       }],
       "require-jsdoc": ["error", {
           "require": {
-              "FunctionDeclaration": true,
-              "MethodDefinition": true,
-              "ClassDeclaration": true
+              "FunctionDeclaration": false,
+              "MethodDefinition": false,
+              "ClassDeclaration": false
           }
       }]
     }
