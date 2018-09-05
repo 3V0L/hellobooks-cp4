@@ -124,6 +124,7 @@ class EditBook extends React.Component {
                             <div className='form-group'>
                                 <label htmlFor="title">Book Title</label>
                                 <input
+                                    id='title'
                                     type="text"
                                     name="title"
                                     placeholder="Enter Title"

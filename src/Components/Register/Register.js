@@ -67,7 +67,7 @@ class Register extends React.Component {
                                     className="form-control"
                                     required/>
                             </div>
-                            <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                            <button id='submit' type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Back to Login</Link>

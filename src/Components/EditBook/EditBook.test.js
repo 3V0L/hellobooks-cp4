@@ -1,9 +1,9 @@
 import React from 'react';
 import moxios from 'moxios';
 import { mount } from 'enzyme';
-import ChangePassword from './ChangePassword';
+import EditBook from './EditBook';
 
-describe('<ChangePassword />', () => {
+describe('<EditBook />', () => {
     beforeEach(() => {
         // Executed before each test
         moxios.install();
@@ -16,21 +16,20 @@ describe('<ChangePassword />', () => {
     // Setup Props for component
     const e = { preventDefault: jest.fn() };
     const props = {
-        onChange: jest.fn(),
-        handleChange: jest.fn(),
+        match: { params: { id: 1 } },
+        preventDefault: jest.fn(),
         history: { push: jest.fn() }
     };
     it('renders without crashing', () => {
-        const component = mount(<ChangePassword {...props}/>);
-        expect(component.find('div').length).toEqual(9);
+        const component = mount(<EditBook {...props}/>);
+        expect(component.find('div').length).toEqual(11);
     });
-    it('changes textbox values to state', () => {
-        const component = mount(<ChangePassword {...props}/>);
+    it('runs submit form function', () => {
+        const component = mount(<EditBook {...props}/>);
         component.setState({
-            oldPassword: 'Pass1234',
-            newPassword: 'NewPass00',
+            date_published: '2018-09-07'
         });
         component.instance().submitForm({ ...e });
-        expect(component.state().oldPassword).toEqual('');
+        expect(component.state().date_published).toEqual('07/09/2018');
     });
 });
