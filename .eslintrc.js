@@ -15,6 +15,7 @@ module.exports =
       "indent": ["error", 4],
       "consistent-return": 0,
       "no-param-reassign": 0,
+      'no-console': 'off',
       "comma-dangle": 0,
       "curly": ["error", "multi-line"],
       "import/no-unresolved": [2, { commonjs: true }],

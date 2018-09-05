@@ -31,8 +31,12 @@ describe('<AddBook />', () => {
         component.setState({ author: 'Example' });
         expect(component.find('#author').instance().value).toEqual('Example');
     });
-    it('handles Component Methods', () => {
-        const component = mount(<AddBook {...props} />);
+    it('runs submit form function', () => {
+        const component = mount(<AddBook {...props}/>);
+        component.setState({
+            date_published: '2018-09-07'
+        });
         component.instance().submitForm({ ...e });
+        expect(component.state().date_published).toEqual('07/09/2018');
     });
 });
