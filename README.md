@@ -37,6 +37,19 @@ $ npm start
 ```
 $ npm test
 ```
+ ## Technologies Used
+ - React JavaScript
+ - Bootstrap
+ - CSS
+ - HTML
+
+## Major Packgaes Used
+ - Axios: used for making API calls
+ - Jest and Enzyme: for testing components
+ - React Router: for navigating through the different components
+ - SweetAlert: JavaScript alerts
+
+## Interface Preview
 
 
 ### Done By Tapiwa Mapfundematsva (3V0L)

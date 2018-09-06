@@ -57,7 +57,7 @@ export const registerPost = (url, input, props) => {
                 `Registration Failed, Please ensure your info is in the following formats:\n${warning}`,
                 'warning')
                 .then(() => {
-                    props.history.push('/auth/register');
+                    props.history.push('/auth-register');
                 });
         });
 };
