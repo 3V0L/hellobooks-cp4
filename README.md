@@ -50,6 +50,12 @@ $ npm test
  - SweetAlert: JavaScript alerts
 
 ## Interface Preview
+<img width="1298" alt="screen shot 2018-09-06 at 15 16 02" src="https://user-images.githubusercontent.com/33119403/45163039-09d8a980-b1f8-11e8-9e9f-de4e82bcaf69.png">
 
+_Table of available books_
+
+<img width="922" alt="screen shot 2018-09-06 at 15 16 27" src="https://user-images.githubusercontent.com/33119403/45163040-09d8a980-b1f8-11e8-87a5-364378817f0b.png">
+
+_Login Page_
 
 ### Done By Tapiwa Mapfundematsva (3V0L)
