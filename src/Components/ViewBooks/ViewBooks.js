@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import { borrowBook } from '../../helpers/borrowUrls';
 import './ViewBooks.css';
-import { deleteBook } from '../../helpers/adminUrls';
+import deleteBook from '../../helpers/adminUrls';
 import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class ViewBooks extends React.Component {
