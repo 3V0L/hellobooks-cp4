@@ -60,7 +60,7 @@ export const returnBook = (bookId, props) => {
                         props.history.push('/home/1');
                     });
             } else {
-                swal('An error occured. Please try again.', '', 'error');
+                swal('An error occured. Please try again later.', '', 'error');
             }
         });
 };

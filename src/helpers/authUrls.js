@@ -150,7 +150,6 @@ export const Logout = (props) => {
             swal(res.data.message, '', 'success')
                 .then(() => {
                     localStorage.clear();
-                    props.history.push('/auth');
                 });
         })
         .catch(() => {
