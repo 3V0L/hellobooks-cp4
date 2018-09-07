@@ -1,6 +1,8 @@
 # Hello Books React Front-End
 [![Build Status](https://travis-ci.org/3V0L/hellobooks-cp4.svg?branch=develop)](https://travis-ci.org/3V0L/hellobooks-cp4) [![Coverage Status](https://coveralls.io/repos/github/3V0L/hellobooks-cp4/badge.svg?branch=develop)](https://coveralls.io/github/3V0L/hellobooks-cp4?branch=develop)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e02a75673a3b4a1eb187e5aa067e894e)](https://app.codacy.com/app/3V0L/hellobooks-cp4?utm_source=github.com&utm_medium=referral&utm_content=3V0L/hellobooks-cp4&utm_campaign=Badge_Grade_Dashboard)
+
 HelloBooks is a library management system written in React that enables users to be able to borrow and return books; along with allowing them to view their full borrowing history. It also allows library administrators to perform CRUD actions on the books within the library.
 
 The front end will be connected to a hosted version of the [HelloBooks-API](https://github.com/3V0L/hellobooks_api). This app will be done in ReactJS and will make use of HTML, CSS and Javascript to create a responsive front end application which connects to the above mentioned API.
