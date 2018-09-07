@@ -40,8 +40,10 @@ class BorrowingHistory extends React.Component {
             .then((res) => {
                 if (res.status === 200) {
                     // Set books as state and map them to table
-                    this.setState({ books: res.data },
-                        () => this.mapBooks());
+                    this.setState(
+                        { books: res.data },
+                        () => this.mapBooks()
+                    );
                 }
             })
             .catch((error) => {

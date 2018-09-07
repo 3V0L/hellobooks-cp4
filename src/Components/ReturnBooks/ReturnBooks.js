@@ -35,8 +35,10 @@ class ReturnBooks extends React.Component {
             .then((res) => {
                 if (res.status === 200 && res.data.length > 0) {
                     // Set books as state and map them to table
-                    this.setState({ books: res.data },
-                        () => this.mapBooks());
+                    this.setState(
+                        { books: res.data },
+                        () => this.mapBooks()
+                    );
                 } else {
                     swal('No Books to Return.', '', 'info');
                 }

@@ -41,8 +41,10 @@ class ViewBooks extends React.Component {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    this.setState({ books: res.data },
-                        () => this.mapBooks());
+                    this.setState(
+                        { books: res.data },
+                        () => this.mapBooks()
+                    );
                 }
             })
             .catch((error) => {
