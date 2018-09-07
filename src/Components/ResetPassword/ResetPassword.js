@@ -9,14 +9,16 @@ class ResetPassword extends React.Component {
     };
 
     componentWillMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
+        // Send form data to password reset function and clear state
         e.preventDefault();
         resetPost('reset-password', this.state, this.props);
         this.setState({ email: '' });

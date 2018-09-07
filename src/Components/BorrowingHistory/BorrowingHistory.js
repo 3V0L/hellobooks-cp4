@@ -3,7 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
-import { Logout } from '../../helpers/authUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class BorrowingHistory extends React.Component {
     constructor(props) {
@@ -14,16 +14,19 @@ class BorrowingHistory extends React.Component {
             paginator: '',
         };
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
+            // Set page to 1 if page entered is not in correct format
             this.state = { page: 1 };
         }
     }
 
     componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
         this.requestBooks();
         this.paginator();
     }
 
     requestBooks() {
+        // Make API call for borrowing history
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/users/books?page=${this.state.page}`,
@@ -36,11 +39,15 @@ class BorrowingHistory extends React.Component {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    this.setState({ books: res.data });
-                    this.mapBooks();
+                    // Set books as state and map them to table
+                    this.setState(
+                        { books: res.data },
+                        () => this.mapBooks()
+                    );
                 }
             })
             .catch((error) => {
+                // Check for non-existent page or logout user for non-authenticated session
                 if (error.response.status === 404) {
                     swal('No more pages.', '', 'error')
                         .then(() => {
@@ -56,6 +63,7 @@ class BorrowingHistory extends React.Component {
     }
 
     changePage = (pageNum) => {
+        // Change page and make request for books
         this.setState({ page: parseInt(pageNum, 10) },
             () => {
                 this.props.history.push(`/my-history/${pageNum}`);
@@ -65,6 +73,7 @@ class BorrowingHistory extends React.Component {
     }
 
     mapBooks = () => {
+        // Assign book values to table fields
         if (this.state.books === undefined || this.state.books < 1) {
             const BookDetails = (<h3 className='no-content'>You have not borrowed a book yet.</h3>);
             this.setState({ bookDetails: BookDetails });
@@ -84,6 +93,7 @@ class BorrowingHistory extends React.Component {
     }
 
     paginator = () => {
+        // Create pagination buttons
         const prevPage = this.state.page - 1;
         const nextPage = this.state.page + 1;
         if (this.state.page !== 1) {
@@ -113,6 +123,7 @@ class BorrowingHistory extends React.Component {
                     <button type="button" className="btn btn-light" disabled>Previous</button>
                     <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
+                        id='next'
                         type="button"
                         className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}

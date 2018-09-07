@@ -4,8 +4,8 @@ import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import { borrowBook } from '../../helpers/borrowUrls';
 import './ViewBooks.css';
-import { deleteBook } from '../../helpers/adminUrls';
-import { Logout } from '../../helpers/authUrls';
+import deleteBook from '../../helpers/adminUrls';
+import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
 
 class ViewBooks extends React.Component {
     constructor(props) {
@@ -16,16 +16,19 @@ class ViewBooks extends React.Component {
             paginator: '',
         };
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
+            // Check if page number is valid or set to one
             this.state = { page: 1 };
         }
     }
 
     componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
         this.requestBooks();
         this.paginator();
     }
 
     requestBooks = () => {
+        // Request Books from API
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/books?page=${this.state.page}`,
@@ -38,11 +41,14 @@ class ViewBooks extends React.Component {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    this.setState({ books: res.data });
-                    this.mapBooks();
+                    this.setState(
+                        { books: res.data },
+                        () => this.mapBooks()
+                    );
                 }
             })
             .catch((error) => {
+                // Check if there are no pages left
                 if (error.response.status === 404) {
                     swal('No more pages.', '', 'error')
                         .then(() => {
@@ -59,6 +65,7 @@ class ViewBooks extends React.Component {
     }
 
     changePage = (pageNum) => {
+        // Change page and request books
         this.setState({ page: parseInt(pageNum, 10) },
             () => {
                 this.props.history.push(`/home/${pageNum}`);
@@ -68,6 +75,7 @@ class ViewBooks extends React.Component {
     }
 
     paginator = () => {
+        // Create paginator buttons
         const prevPage = this.state.page - 1;
         const nextPage = this.state.page + 1;
         if (this.state.page !== 1) {
@@ -94,9 +102,10 @@ class ViewBooks extends React.Component {
         } else {
             const Paginator = (
                 <div className="btn-group pagination" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-light" disabled>Previous</button>
+                    <button id='previous' type="button" className="btn btn-light" disabled>Previous</button>
                     <button type="button" className="btn btn-dark" disabled>Page {this.state.page}</button>
                     <button
+                        id='next'
                         type="button"
                         className="btn btn-light"
                         onClick={() => { this.changePage(nextPage); }}
@@ -110,6 +119,7 @@ class ViewBooks extends React.Component {
     }
 
     mapBooks = () => {
+        // Map the books received to table rows
         if (this.state.books === undefined || this.state.books < 1) {
             const BookDetails = (<h3 className='no-content'>No Books Here.</h3>);
             this.setState({ bookDetails: BookDetails });
@@ -126,14 +136,17 @@ class ViewBooks extends React.Component {
                     <td>{book.copies}</td>
                     <td>
                         <button
+                            id='borrowBook'
                             type="button"
                             className="btn btn-info"
                             onClick={() => { this.borrowBookFunction(book.id); }}>
                             Borrow this book
                         </button>
                         { localStorage.getItem('admin') === 'true'
+                            // If user is admin display edit and delete button
                             ? <div className='admin-actions'>
                                 <button
+                                    id='editBook'
                                     type="button"
                                     className="btn btn-success btn-sm admin-btn"
                                     onClick={() => this.props.history.push(`/edit-book/${book.id}`) }
@@ -141,6 +154,7 @@ class ViewBooks extends React.Component {
                                     Edit
                                 </button>
                                 <button
+                                    id='deleteBook'
                                     type="button"
                                     className="btn btn-danger btn-sm"
                                     onClick={() => deleteBook(book.id, book.title, this.props)}

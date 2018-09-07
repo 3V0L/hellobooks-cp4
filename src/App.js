@@ -13,13 +13,13 @@ import BorrowingHistory from './Components/BorrowingHistory/BorrowingHistory';
 import ReturnBooks from './Components/ReturnBooks/ReturnBooks';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import NotFound from './Components/NotFound/NotFound';
-import { checkIfLoggedIn } from './helpers/authUrls';
 import EditBook from './Components/EditBook/EditBook';
 import AddBook from './Components/AddBook/AddBook';
 
 export default class App extends React.Component {
     render() {
         const ProtectedRoute = ({ ...props }) => (
+            // Check if user is authenticated to access route
             localStorage.getItem('isAllowed') ? <Route {...props}/> : <Redirect to="/"/>
         );
 
@@ -31,8 +31,7 @@ export default class App extends React.Component {
                     <Route exact path={'/auth-register'} component={Register} />
                     <Route exact path={'/auth-reset-password'} component={ResetPassword} />
                     <div>
-                        <NavBar />
-                        { checkIfLoggedIn(this.props) }
+                        <NavBar props={this.props}/>
                         <Switch>
                             <ProtectedRoute exact path={'/home/:page'} component={ViewBooks} />
                             <ProtectedRoute exact path={'/my-history/:page'} component={BorrowingHistory} />

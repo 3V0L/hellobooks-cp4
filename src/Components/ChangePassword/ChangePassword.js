@@ -13,25 +13,29 @@ class ChangePassword extends React.Component {
         confirmPassword: '',
     };
 
-    componentWillMount() {
-        checkIfLoggedIn(this.props);
+    componentDidMount() {
+        checkIfLoggedIn(this.props, 'auth');
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
         e.preventDefault();
+        // Check if confirmed password matches new password
         if (this.state.newPassword !== this.state.confirmPassword) {
             swal('New Password Does not match Confirmation', '', 'error');
             this.setState({
+                // Reset states for wrong confirmation
                 oldPassword: '',
                 newPassword: '',
                 confirmPassword: '',
             });
         } else {
             const input = {
+                // Set input for API request
                 old_password: this.state.oldPassword,
                 new_password: this.state.newPassword
             };
@@ -52,6 +56,7 @@ class ChangePassword extends React.Component {
                         });
                 })
                 .catch((error) => {
+                    // Check if password doesnt match (401), otherwise logout user
                     if (error.response.status === 401) {
                         swal(error.response.data.message, '', 'error')
                             .then(() => {
@@ -99,6 +104,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="email">Old Password</label>
                                     <input
+                                        id='oldPassword'
                                         type="password"
                                         name="oldPassword"
                                         value={this.state.oldPassword}
@@ -111,6 +117,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="newPassword">New Password</label>
                                     <input
+                                        id='newPassword'
                                         type="password"
                                         name="newPassword"
                                         value={this.state.newPassword}
@@ -122,6 +129,7 @@ class ChangePassword extends React.Component {
                                 <div className="form-group">
                                     <label htmlFor="confirmPassword">Confirm New Password</label>
                                     <input
+                                        id='confirmPassword'
                                         type="password"
                                         name="confirmPassword"
                                         value={this.state.confirmPassword}
@@ -130,7 +138,7 @@ class ChangePassword extends React.Component {
                                         placeholder="Confirm New Password"
                                         required/>
                                 </div>
-                                <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
+                                <button id='submitPassword' type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
                             </form>
                         </div>
                     </div>

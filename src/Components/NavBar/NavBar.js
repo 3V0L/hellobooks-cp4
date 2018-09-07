@@ -7,6 +7,7 @@ class NavBar extends React.Component {
     render() {
         let AdminNav = '';
         if (localStorage.getItem('admin') === 'true') {
+            // Check if user is admin and display add book function
             AdminNav = (
                 <li className="nav-item">
                     <Link

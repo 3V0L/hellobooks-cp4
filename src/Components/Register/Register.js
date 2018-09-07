@@ -11,14 +11,16 @@ class Register extends React.Component {
     };
 
     componentWillMount() {
-        checkIfLoggedIn(this.props);
+        checkIfLoggedIn(this.props, '');
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
+        // Submit state to registration function
         e.preventDefault();
         registerPost('register', this.state, this.props);
         this.setState({ password: '' });
@@ -67,7 +69,7 @@ class Register extends React.Component {
                                     className="form-control"
                                     required/>
                             </div>
-                            <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                            <button id='submit' type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                         </form>
                         <div className='footer-card'>
                             <Link to="/auth" className='link'>Back to Login</Link>
