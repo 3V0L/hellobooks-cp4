@@ -20,6 +20,7 @@ describe('<Register />', () => {
         history: { push: jest.fn() }
     };
     it('renders without crashing', () => {
+        // Render component in route to allow for link to appear
         const component = mount(
             <Router>
                 <ResetPassword {...props}/>

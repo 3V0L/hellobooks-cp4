@@ -16,9 +16,6 @@ describe('<BorrowingHistory />', () => {
     // Setup Props for component
     const props = {
         match: { params: { page: 1 } },
-        onChange: jest.fn(),
-        handleChange: jest.fn(),
-        preventDefault: jest.fn(),
         history: { push: jest.fn() }
     };
     it('renders without crashing', () => {
@@ -28,7 +25,7 @@ describe('<BorrowingHistory />', () => {
     it('simulate next page click', () => {
         const component = mount(<BorrowingHistory {...props}/>);
         expect(component.state().page).toEqual(1);
-        // Change page
+        // Change page and check page number state
         component.find('#next').simulate('click');
         expect(component.state().page).toEqual(2);
     });

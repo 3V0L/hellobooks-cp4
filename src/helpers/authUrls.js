@@ -5,6 +5,7 @@ import baseURL from './baseURL';
 const URL = `${baseURL}/auth/`;
 
 export const resetPost = (url, input, props) => {
+    // Reset password request
     axios({
         url: `${URL}${url}`,
         method: 'post',
@@ -21,10 +22,11 @@ export const resetPost = (url, input, props) => {
                 });
         })
         .catch((error) => {
+            // Check for email does not exist error otherwise display generic error
             if (error.response.status === 404) {
-                swal('Error', 'Email does not exist. Try registering =)', 'error');
+                swal('Email does not exist', 'Try registering =)', 'error');
             } else {
-                swal('Error', 'Failed, Please Try Again.', 'error');
+                swal('Failed', 'Please Try Again.', 'error');
             }
         });
 };
@@ -32,7 +34,7 @@ export const resetPost = (url, input, props) => {
 export const registerPost = (url, input, props) => {
     // Warning message for incorrect details entered
     const warning = ('\nName: At least 4 characters/Alphabet Letters only\n\nPassword: At least 6 characters\n\nEmail: Formatted like me@example.com');
-    // Axios request
+    // Registration request
     axios({
         url: `${URL}${url}`,
         method: 'post',
@@ -57,12 +59,13 @@ export const registerPost = (url, input, props) => {
                 `Registration Failed, Please ensure your info is in the following formats:\n${warning}`,
                 'warning')
                 .then(() => {
-                    props.history.push('/auth/register');
+                    props.history.push('/auth-register');
                 });
         });
 };
 
 export const loginPost = (url, input, props) => {
+    // Login request call
     axios({
         url: `${URL}${url}`,
         method: 'post',
@@ -73,6 +76,7 @@ export const loginPost = (url, input, props) => {
         }
     })
         .then((res) => {
+            // Save data to local storage
             localStorage.setItem('token', res.data.access_token);
             localStorage.setItem('name', res.data.user);
             localStorage.setItem('admin', res.data.admin);
@@ -90,6 +94,7 @@ export const loginPost = (url, input, props) => {
 };
 
 export const checkIfLoggedIn = (props, redirect) => {
+    // Check if a user is authenticated
     const token = localStorage.getItem('token');
     axios({
         url: `${URL}login_check`,
@@ -102,8 +107,10 @@ export const checkIfLoggedIn = (props, redirect) => {
     })
         .then((res) => {
             if (res.status === 200) {
+                // If the request is successful set local storage allowed to true
                 localStorage.setItem('isAllowed', true);
                 if (props.history.location.pathname.includes('auth')) {
+                    // If the user is out of the system they are redirected
                     swal('You are logged in.', '', 'info')
                         .then(() => {
                             props.history.push('/home/1');
@@ -112,7 +119,9 @@ export const checkIfLoggedIn = (props, redirect) => {
             }
         })
         .catch((err) => {
+            // If request fails push user to redirect
             localStorage.setItem('isAllowed', false);
+            // Check if the redirect is existent then push user to the path
             if (redirect.length > 1) {
                 swal('You are not logged in', '', 'warning')
                     .then(() => {
@@ -124,6 +133,7 @@ export const checkIfLoggedIn = (props, redirect) => {
 };
 
 export const Logout = (props) => {
+    // Logout function
     const token = localStorage.getItem('token');
     axios({
         url: `${URL}logout`,
@@ -140,7 +150,6 @@ export const Logout = (props) => {
             swal(res.data.message, '', 'success')
                 .then(() => {
                     localStorage.clear();
-                    props.history.push('/auth');
                 });
         })
         .catch(() => {

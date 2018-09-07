@@ -18,20 +18,24 @@ class ChangePassword extends React.Component {
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
         e.preventDefault();
+        // Check if confirmed password matches new password
         if (this.state.newPassword !== this.state.confirmPassword) {
             swal('New Password Does not match Confirmation', '', 'error');
             this.setState({
+                // Reset states for wrong confirmation
                 oldPassword: '',
                 newPassword: '',
                 confirmPassword: '',
             });
         } else {
             const input = {
+                // Set input for API request
                 old_password: this.state.oldPassword,
                 new_password: this.state.newPassword
             };
@@ -52,6 +56,7 @@ class ChangePassword extends React.Component {
                         });
                 })
                 .catch((error) => {
+                    // Check if password doesnt match (401), otherwise logout user
                     if (error.response.status === 401) {
                         swal(error.response.data.message, '', 'error')
                             .then(() => {

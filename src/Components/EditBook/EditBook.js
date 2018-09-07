@@ -20,6 +20,7 @@ class EditBook extends React.Component {
             copies: ''
         };
         if (isNaN(this.props.match.params.bookId)) {
+            // Check if ID parameter is a number
             swal('There is no book with that #ID!', '', 'error')
                 .then(() => {
                     props.history.push('/home/1');
@@ -31,6 +32,7 @@ class EditBook extends React.Component {
         checkIfLoggedIn(this.props, 'auth');
         const token = localStorage.getItem('token');
         axios({
+            // Retrieve the book by its ID
             url: `${baseURL}/books/${parseInt(this.props.match.params.bookId, 10)}`,
             method: 'get',
             data: this.state,
@@ -41,21 +43,19 @@ class EditBook extends React.Component {
             }
         })
             .then((res) => {
-                if (res.status === 200) {
-                    this.setState({
-                        title: res.data.title,
-                        author: res.data.author,
-                        date_published: res.data.date_published.split('/').reverse().join('-'),
-                        genre: res.data.genre,
-                        description: res.data.description,
-                        isbn: res.data.isbn,
-                        copies: res.data.copies,
-                    });
-                } else {
-                    swal(res.data.message, 'Enter info according to the helpers below the textbox', 'info');
-                }
+                // Map the book to state
+                this.setState({
+                    title: res.data.title,
+                    author: res.data.author,
+                    date_published: res.data.date_published.split('/').reverse().join('-'),
+                    genre: res.data.genre,
+                    description: res.data.description,
+                    isbn: res.data.isbn,
+                    copies: res.data.copies,
+                });
             })
             .catch((error) => {
+                // Check if book doesnt exist
                 if (error.response.status === 404) {
                     swal(error.response.data.message, '', 'error')
                         .then(() => { this.props.history.push('/home/1'); });
@@ -66,13 +66,16 @@ class EditBook extends React.Component {
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
         e.preventDefault();
+        // Set date to format accepted by the API
         this.setState({ date_published: this.state.date_published.split('-').reverse().join('/') },
             () => {
+                // Submit book details to API (Synchronously)
                 const token = localStorage.getItem('token');
                 axios({
                     url: `${baseURL}/books/${this.state.bookId}`,
@@ -93,6 +96,7 @@ class EditBook extends React.Component {
                     }
                 })
                     .then((res) => {
+                        // Check if edited, otherwise display alert of the field not working
                         if (res.status === 201) {
                             swal(res.data.message, '', 'success')
                                 .then(() => { this.props.history.push('/home/1'); });
@@ -102,7 +106,7 @@ class EditBook extends React.Component {
                     })
                     .catch((error) => {
                         if (error.response.status === 401) {
-                            swal(`${error.response.data.message} This is as seen below the inputs`, '', 'error')
+                            swal(`${error.response.data.message}. This is as seen below the inputs`, '', 'error')
                                 .then(() => { this.props.history.push('/home/1'); });
                         } else {
                             swal(error.response.data.message, '', 'error')

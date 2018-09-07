@@ -29,6 +29,7 @@ describe('<EditBook />', () => {
         component.setState({
             date_published: '2018-09-07'
         });
+        // Submit form and check if date format is changed
         component.instance().submitForm({ ...e });
         expect(component.state().date_published).toEqual('07/09/2018');
     });

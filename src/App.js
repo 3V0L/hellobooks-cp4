@@ -19,6 +19,7 @@ import AddBook from './Components/AddBook/AddBook';
 export default class App extends React.Component {
     render() {
         const ProtectedRoute = ({ ...props }) => (
+            // Check if user is authenticated to access route
             localStorage.getItem('isAllowed') ? <Route {...props}/> : <Redirect to="/"/>
         );
 
