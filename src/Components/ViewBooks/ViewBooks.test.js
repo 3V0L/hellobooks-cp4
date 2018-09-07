@@ -28,7 +28,7 @@ describe('<ViewBooks />', () => {
     it('simulate next page click', () => {
         const component = mount(<ViewBooks {...props}/>);
         expect(component.state().page).toEqual(1);
-        // Change page
+        // Change page and check for state change
         component.find('#next').simulate('click');
         expect(component.state().page).toEqual(2);
     });
@@ -36,5 +36,7 @@ describe('<ViewBooks />', () => {
         const component = mount(<ViewBooks {...props}/>);
         component.instance().requestBooks();
         component.instance().mapBooks();
+        // Check if there is an H3 for books not available
+        expect(component.find('h3').length).toEqual(1);
     });
 });

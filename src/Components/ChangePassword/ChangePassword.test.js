@@ -30,6 +30,7 @@ describe('<ChangePassword />', () => {
             oldPassword: 'Pass1234',
             newPassword: 'NewPass00',
         });
+        // Submit form and check if state is cleared
         component.instance().submitForm({ ...e });
         expect(component.state().oldPassword).toEqual('');
     });

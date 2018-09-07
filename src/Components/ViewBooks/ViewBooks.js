@@ -16,6 +16,7 @@ class ViewBooks extends React.Component {
             paginator: '',
         };
         if (Number.isInteger(this.state.page) === false || this.state.page < 1) {
+            // Check if page number is valid or set to one
             this.state = { page: 1 };
         }
     }
@@ -27,6 +28,7 @@ class ViewBooks extends React.Component {
     }
 
     requestBooks = () => {
+        // Request Books from API
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/books?page=${this.state.page}`,
@@ -39,11 +41,12 @@ class ViewBooks extends React.Component {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    this.setState({ books: res.data });
-                    this.mapBooks();
+                    this.setState({ books: res.data },
+                        () => this.mapBooks());
                 }
             })
             .catch((error) => {
+                // Check if there are no pages left
                 if (error.response.status === 404) {
                     swal('No more pages.', '', 'error')
                         .then(() => {
@@ -60,6 +63,7 @@ class ViewBooks extends React.Component {
     }
 
     changePage = (pageNum) => {
+        // Change page and request books
         this.setState({ page: parseInt(pageNum, 10) },
             () => {
                 this.props.history.push(`/home/${pageNum}`);
@@ -69,6 +73,7 @@ class ViewBooks extends React.Component {
     }
 
     paginator = () => {
+        // Create paginator buttons
         const prevPage = this.state.page - 1;
         const nextPage = this.state.page + 1;
         if (this.state.page !== 1) {
@@ -112,6 +117,7 @@ class ViewBooks extends React.Component {
     }
 
     mapBooks = () => {
+        // Map the books received to table rows
         if (this.state.books === undefined || this.state.books < 1) {
             const BookDetails = (<h3 className='no-content'>No Books Here.</h3>);
             this.setState({ bookDetails: BookDetails });
@@ -135,6 +141,7 @@ class ViewBooks extends React.Component {
                             Borrow this book
                         </button>
                         { localStorage.getItem('admin') === 'true'
+                            // If user is admin display edit and delete button
                             ? <div className='admin-actions'>
                                 <button
                                     id='editBook'

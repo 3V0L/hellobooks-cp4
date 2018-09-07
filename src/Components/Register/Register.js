@@ -15,10 +15,12 @@ class Register extends React.Component {
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
+        // Submit state to registration function
         e.preventDefault();
         registerPost('register', this.state, this.props);
         this.setState({ password: '' });

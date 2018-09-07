@@ -21,9 +21,9 @@ describe('<Register />', () => {
         const component = mount(<ReturnBooks {...props}/>);
         expect(component.find('div').length).toEqual(1);
     });
-    it('runs the submit form function', () => {
+    it('runs map books function', () => {
         const component = mount(<ReturnBooks {...props}/>);
-        // Submit form and check if state is cleared
+        // Map books and check for <h3> for no available books
         component.instance().mapBooks();
         expect(component.find('h3').length).toEqual(1);
     });

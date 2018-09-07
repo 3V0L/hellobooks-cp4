@@ -17,12 +17,14 @@ class Home extends React.Component {
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
         e.preventDefault();
         loginPost('login', this.state, this.props);
+        // Clear state so text box clears
         this.setState({
             email: '',
             password: '',

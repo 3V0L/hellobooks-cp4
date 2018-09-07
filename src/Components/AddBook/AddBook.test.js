@@ -29,6 +29,7 @@ describe('<AddBook />', () => {
     it('check field changes according to state', () => {
         const component = mount(<AddBook {...props}/>);
         component.setState({ author: 'Example' });
+        // Check the value of the author input changes
         expect(component.find('#author').instance().value).toEqual('Example');
     });
     it('runs submit form function', () => {
@@ -37,6 +38,7 @@ describe('<AddBook />', () => {
             date_published: '2018-09-07'
         });
         component.instance().submitForm({ ...e });
+        // Check that the format of date changes as the function should do
         expect(component.state().date_published).toEqual('07/09/2018');
     });
 });

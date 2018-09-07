@@ -4,7 +4,8 @@ import baseURL from './baseURL';
 
 const token = localStorage.getItem('token');
 
-export const deleteBook = (bookId, bookTitle, props) => {
+export default (bookId, bookTitle, props) => {
+    // Pop up asking for book delete confirmation
     swal(`Are you sure you want to delete ${bookTitle}?`, {
         buttons: {
             cancel: 'Cancel Action',
@@ -23,6 +24,7 @@ export const deleteBook = (bookId, bookTitle, props) => {
 };
 
 const deleteAction = (bookId, props) => {
+    // Function for deleting a book
     axios({
         url: `${baseURL}/books/${bookId}`,
         method: 'delete',
@@ -35,11 +37,13 @@ const deleteAction = (bookId, props) => {
         .then((res) => {
             swal('Success!', `${res.data.message}`, 'success')
                 .then(() => {
+                    // force refresh by pushing a url then replacing it
                     props.history.push('/home');
                     props.history.replace('/home/1');
                 });
         })
         .catch((error) => {
+            // Check if book doesnt exist, else display error
             if (error.response.status === 404) {
                 swal('Error', 'Book Does Not Exist', 'error');
             } else {
@@ -47,5 +51,3 @@ const deleteAction = (bookId, props) => {
             }
         });
 };
-
-export const Fake = 'Text';

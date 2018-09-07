@@ -22,13 +22,16 @@ class AddBook extends React.Component {
     }
 
     handleChange = (e) => {
+        // Assign updated value to state
         this.setState({ [e.target.name]: e.target.value });
     }
 
     submitForm = (e) => {
         e.preventDefault();
+        // Set date to format accepted by the API
         this.setState({ date_published: this.state.date_published.split('-').reverse().join('/') },
             () => {
+                // Submit book details to API (Synchronously)
                 const token = localStorage.getItem('token');
                 axios({
                     url: `${baseURL}/books`,
@@ -45,10 +48,12 @@ class AddBook extends React.Component {
                             swal(res.data.message, '', 'success')
                                 .then(() => { this.props.history.push('/home/1'); });
                         } else {
+                            // Display the message contaning the field with invalid data
                             swal(res.data.message, 'Enter info according to the helpers below the textbox', 'info');
                         }
                     })
                     .catch((error) => {
+                        // Send user to home if book exists(conflict) otherwise display message
                         if (error.response.status === 409) {
                             swal(error.response.data.message, '', 'error')
                                 .then(() => { this.props.history.push('/home/1'); });

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../ViewBooks/ViewBooks.css';
 
 const NotFound = () => (
+    // 404 Page
     <div>
         <center>
             <h1 className='err404'>404: Page Not Found</h1>

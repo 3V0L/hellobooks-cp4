@@ -3,7 +3,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import baseURL from '../../helpers/baseURL';
 import '../ViewBooks/ViewBooks.css';
-import { Logout, checkIfLoggedIn } from '../../helpers/authUrls';
+import { checkIfLoggedIn } from '../../helpers/authUrls';
 import { returnBook } from '../../helpers/borrowUrls';
 
 class ReturnBooks extends React.Component {
@@ -21,6 +21,7 @@ class ReturnBooks extends React.Component {
     }
 
     requestBooks() {
+        // Request books to return
         const token = localStorage.getItem('token');
         axios({
             url: `${baseURL}/users/books?returned=false`,
@@ -33,26 +34,18 @@ class ReturnBooks extends React.Component {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    this.setState({ books: res.data });
-                    this.mapBooks();
+                    // Set books as state and map them to table
+                    this.setState({ books: res.data },
+                        () => this.mapBooks());
                 }
             })
             .catch((error) => {
-                if (error.response.status === 404) {
-                    swal('No book under this Borrow Id.', '', 'error')
-                        .then(() => {
-                            this.props.history.push('/home/1');
-                        });
-                } else {
-                    swal('An error occured. Please try log in again.', '', 'error')
-                        .then(() => {
-                            Logout(this.props);
-                        });
-                }
+                swal(error.response.data.message, '', 'error');
             });
     }
 
     mapBooks = () => {
+        // Map books to table rows
         if (this.state.books === undefined || this.state.books < 1) {
             const BookDetails = (<h3 className='no-content'>You have not borrowed a book yet.</h3>);
             this.setState({ bookDetails: BookDetails });

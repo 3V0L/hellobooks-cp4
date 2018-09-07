@@ -34,6 +34,7 @@ export const borrowBook = (bookId, props) => {
 };
 
 export const returnBook = (bookId, props) => {
+    // Function for returning a book
     axios({
         url: `${URL}${bookId}`,
         method: 'put',
@@ -53,6 +54,7 @@ export const returnBook = (bookId, props) => {
         })
         .catch((error) => {
             if ([401, 404].includes(error.response.status)) {
+                // Check for unauthorized or entry does not exist and display message
                 swal(error.response.data.message, '', 'error')
                     .then(() => {
                         props.history.push('/home/1');
