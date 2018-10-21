@@ -18,7 +18,6 @@ $ npm -v
 ```
 
 
-
 ## Cloning the Repository
 - Clone the Repo using the following command:
 ```
